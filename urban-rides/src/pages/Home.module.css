@@ -1,0 +1,47 @@
+.home {
+  width: 100%;
+  min-height: 100vh;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* HERO */
+.hero {
+  width: 100vw;
+  min-height: 100vh;
+
+  background-image: url("../assets/car.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.heroContent{
+    max-width: 50%;
+}
+
+.heroTitle {
+  flex-grow: inherit;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0px;
+}
+
+.heroText {
+  width: 100%;
+  font-size: 0.85rem;
+  color: #f3f4f6;
+  margin: 0px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
