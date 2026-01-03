@@ -56,7 +56,7 @@ const Home = () => {
 
         {/* How It Works Section */}
         <section className={styles.howItWorks}>
-          <h2 className={styles.sectionTitle}>How Urban Rides Works !</h2>
+          <h2 className={styles.sectionTitle}>How Urban Rides Works!</h2>
           <p className={styles.sectionSubtitle}>
             A simple process designed for both renters and car owners
           </p>
@@ -65,61 +65,61 @@ const Home = () => {
 
             {/* RENTER FLOW */}
             <div className={styles.flowCard}>
-              <h3 className={styles.flowTitle}>For Renters</h3>
+              <div className={styles.titleWrap}>
+                <h3 className={styles.flowTitle}>For Renters</h3>
+                <svg
+                  className={styles.titleSvg}
+                  viewBox="0 0 300 120"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    className={styles.circlePath}
+                    d="M40,70
+                      C70,20 230,20 260,60
+                      C275,90 140,115 60,90
+                      C100,60 230,35 280,45"
+                  />
+                </svg>
+              </div>
 
               <div className={styles.stepsRow}>
-                <div className={styles.step}>
-                  <span>1</span>
-                  <p>Renter</p>
-                </div>
+                <div className={styles.step}><span>1</span><p>Renter</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>2</span>
-                  <p>Select</p>
-                </div>
+                <div className={styles.step}><span>2</span><p>Select</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>3</span>
-                  <p>Book</p>
-                </div>
+                <div className={styles.step}><span>3</span><p>Book</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>4</span>
-                  <p>Drive</p>
-                </div>
+                <div className={styles.step}><span>4</span><p>Drive</p></div>
               </div>
             </div>
 
             {/* OWNER FLOW */}
             <div className={styles.flowCard}>
-              <h3 className={styles.flowTitle}>For Owners</h3>
+              <div className={styles.titleWrap}>
+                <h3 className={styles.flowTitle}>For Owners</h3>
+                <svg
+                  className={styles.titleSvg}
+                  viewBox="0 0 300 120"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    className={styles.circlePath}
+                    d="M40,70
+                      C70,20 230,20 260,60
+                      C275,90 140,115 60,90
+                      C50,82 100,65 190,50"
+                  />
+                </svg>
+              </div>
 
               <div className={styles.stepsRow}>
-                <div className={styles.step}>
-                  <span>1</span>
-                  <p>Owner</p>
-                </div>
+                <div className={styles.step}><span>1</span><p>Owner</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>2</span>
-                  <p>List</p>
-                </div>
+                <div className={styles.step}><span>2</span><p>List</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>3</span>
-                  <p>Verify</p>
-                </div>
+                <div className={styles.step}><span>3</span><p>Verify</p></div>
                 <div className={styles.line}></div>
-
-                <div className={styles.step}>
-                  <span>4</span>
-                  <p>Earn</p>
-                </div>
+                <div className={styles.step}><span>4</span><p>Earn</p></div>
               </div>
             </div>
 
@@ -133,11 +133,25 @@ const Home = () => {
           </div>
         </section>
 
-
-
         {/* Why Us section */}
         <section className={styles.WhyUsSection}>
-          <h2 className={styles.WhyUsTitle}>Why Choose Urban Rides?</h2>
+          <h2 className={styles.WhyUsTitle}>Why Choose{" "}
+            <span className={styles.UnderlineWrap}>
+              Urban Rides
+              <svg
+                className={styles.UnderlineSvg}
+                viewBox="0 0 200 50"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  className={styles.UnderlinePath}
+                  d="M5,35 C60,45 150,25 190,35"
+                />
+              </svg>
+            </span>
+            ?
+          </h2>
+
           <p className={styles.WhyUsText}>
             At Urban Rides, we prioritize your convenience and satisfaction. Our platform
             offers a seamless experience for both renters and owners, ensuring reliable
@@ -181,6 +195,74 @@ const Home = () => {
             </div>
           </div> 
         </section>
+
+        {/* CTA Section */}
+        <section className={styles.ctaSection}>
+          <h3 className={styles.ctaTitle}>
+            Ready to get started with Urban Rides?
+          </h3>
+          <p className={styles.ctaText}>
+            Join as a renter or list your car in minutes.
+          </p>
+
+          <div className={styles.ctaButtons}>
+            <button className={styles.primaryBtn}>Explore Cars</button>
+            <button className={styles.secondaryBtn}>List Your Car</button>
+          </div>
+        </section>
+
+        <footer className={styles.footer}>
+          <div className={styles.footerTop}>
+
+            {/* Left Side */}
+            <div className={styles.footerLinks}>
+
+              <div className={styles.linkColumn}>
+                <h4>Quick Links</h4>
+                <ul>
+                  <li>Home</li>
+                  <li>About Us</li>
+                  <li>Why Urban Rides</li>
+                  <li>Contact</li>
+                </ul>
+              </div>
+
+              <div className={styles.linkColumn}>
+                <h4>Services</h4>
+                <ul>
+                  <li>Rent a Car</li>
+                  <li>List Your Car</li>
+                  <li>Owner Dashboard</li>
+                  <li>Support</li>
+                </ul>
+              </div>
+
+            </div>
+
+            {/* Right Side */}
+            <div className={styles.footerBrand}>
+              <h2 className={styles.brandLogo}>URBAN RIDES</h2>
+
+              <div className={styles.newsletterBox}>
+                <p className={styles.brandText}>
+                  STAY IN THE LOOP WITH OUR WEEKLY NEWSLETTER
+                </p>
+
+                <div className={styles.newsletter}>
+                  <input type="email" placeholder="Enter your email" />
+                  <button aria-label="Subscribe">→</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Bottom */}
+          <div className={styles.footerBottom}>
+            © 2026 Urban Rides. All rights reserved.
+          </div>
+        </footer>
+
 
       </main>
 

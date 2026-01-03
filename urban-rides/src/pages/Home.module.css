@@ -147,7 +147,7 @@
 /* How It Works */
 .howItWorks {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 2rem 1rem;
   background: #f8fafc;
   text-align: center;
@@ -157,35 +157,76 @@
   font-size: 1.7rem;
   font-weight: 600;
   color: #171717;
+  font-family: Barlow, sans-serif;
 }
 
 .sectionSubtitle {
   max-width: 620px;
   margin: 0.5rem auto 2rem;
-  font-size: 0.80rem;
+  font-size: 0.8rem;
   color: #475569;
 }
 
-/* Flow Containers */
+/* Flow wrapper layout */
 .flowsContainer {
   display: flex;
   gap: 2rem;
   justify-content: center;
+  flex-wrap: wrap; 
 }
 
 .flowCard {
-  background: #ffffff;
+  background: #fff;
   padding: 1.5rem 1.5rem 2.5rem 1.5rem;
   border-radius: 16px;
   width: 40%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.135);
 }
 
-.flowTitle {
-  font-size: 1.2rem;
-  font-weight: 600;
+/* Title wrapper and text */
+.titleWrap {
+  position: relative;
+  display: inline-block;
   margin-bottom: 2rem;
+  font-family: Barlow, sans-serif;
+}
+
+.flowTitle {
+  position: relative;
+  z-index: 2;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
   color: #020617;
+  padding: 0.3rem 0.6rem;
+}
+
+.titleSvg {
+  position: absolute;
+  top: 10px;
+  left: 35px;
+  width: 130%;
+  height: 130%;
+  transform: translate(-15%, -25%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.circlePath {
+  fill: none;
+  stroke: #CDFF65;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawCircle 1.6s ease forwards;
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Steps */
@@ -218,7 +259,7 @@
   color: #334155;
 }
 
-/* Connecting Line */
+/* Connecting line */
 .line {
   flex: 1;
   height: 2px;
@@ -281,9 +322,41 @@
 }
 
 .WhyUsTitle {
-  font-size: 1.7rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 700;
   color: #171717;
+  font-family: Barlow, sans-serif;
+  margin-bottom: 0.8rem;
+}
+
+.UnderlineWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.UnderlineSvg {
+  position: absolute;
+  bottom: -8px;
+  left: -10px;
+  width: 115%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.UnderlinePath {
+  fill: none;
+  stroke: #CDFF65;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: drawUnderline 0.5s ease forwards;
+}
+
+@keyframes drawUnderline {
+  to { stroke-dashoffset: 0; }
 }
 
 .WhyUsText {
@@ -312,9 +385,7 @@
   transition: transform 0.3s ease;
 }
 
-.carCard:hover {
-  transform: translateY(-6px);
-}
+.carCard:hover { transform: translateY(-6px); }
 
 .carCard img {
   width: 100%;
@@ -324,7 +395,7 @@
 
 .carCard h4 {
   margin: 0.6rem 0 0.2rem;
-  font-size: 0.90rem;
+  font-size: 0.9rem;
   color: #171717ef;
 }
 
@@ -341,8 +412,7 @@
   overflow: hidden;
   position: relative;
   padding: 1rem 0;
-  background-color: #171717;
-  
+  background-color: #060a17;
 }
 
 .scrollContent {
@@ -350,6 +420,8 @@
   align-items: center;
   gap: 4rem;
   animation: scrollLeft 15s linear infinite;
+  position: relative;
+  top: -5px;
 }
 
 .item {
@@ -375,3 +447,207 @@
     transform: translateX(-50%);
   }
 } 
+
+/* CTA Section */
+.ctaSection {
+  width: 100%;
+  padding: 2.5rem 1rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #020617;
+}
+
+.ctaText {
+  margin: 0.6rem auto 1.5rem;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  padding: 0.6rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #020617;
+  color: #ffffff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  padding: 0.6rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #020617;
+  background: transparent;
+  color: #020617;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  opacity: 0.9;
+}
+
+.secondaryBtn:hover {
+  background: #020617;
+  color: #ffffff;
+}
+
+/* Footer */
+.footer {
+  width: 100%;
+  height: 100vh;
+  background: #171717;
+  padding: 3rem 1.5rem 1rem;
+  color: #e5e7eb;
+}
+
+/* Top Layout */
+
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Left Columns */
+.footerLinks {
+  display: flex;
+  gap: 4rem;
+  align-items: flex-start; 
+}
+
+.linkColumn h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #CDFF65;
+}
+
+.linkColumn ul {
+  list-style: none;
+  padding: 0;
+}
+
+.linkColumn li {
+  font-family: Lato, sans-serif;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+  color: #f8fafc;
+  cursor: pointer;
+  position: relative;    
+  width: fit-content;   
+}
+
+/* underline effect */
+.linkColumn li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 0%;
+  height: 0.8px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.linkColumn li:hover::after {
+  width: 100%;
+}
+
+
+/* Right Branding */
+.footerBrand {
+  max-width: 360px;
+}
+
+.brandLogo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #CDFF65;
+  margin-bottom: 1.2rem;
+}
+
+.newsletterBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Headline text */
+.brandText {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #f8fafc;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  font-family: Barlow, sans-serif;
+}
+
+.newsletter {
+  display: flex;
+  align-items: center;
+  background: #282525bc;
+  padding: 0.3rem;
+  max-width: 250px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 0.6rem 0.7rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffffb9;
+  font-size: 0.7rem;
+  font-weight: 300;
+}
+
+.newsletter button {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background: #CDFF65;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #020617;
+
+  transition: transform 0.2s ease;
+}
+
+.newsletter button:hover {
+  transform: translateX(2px);
+}
+
+/* Bottom */
+.footerBottom {
+  position: relative;
+  top: 80px;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #1e293b;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: left;
+}
