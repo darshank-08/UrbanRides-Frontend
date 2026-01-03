@@ -65,13 +65,14 @@
   .navbar {
     width: 60%;
     margin-bottom: 5%;
+    top: 25px;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
     width: 70%;
-    top: 15px;
+    top: 30px;
     padding: 0 10px;
   }
 

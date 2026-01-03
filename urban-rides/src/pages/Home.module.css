@@ -52,6 +52,46 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Small Laptop */
+@media 
+  (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .hero {
+    background-position: 50% center;
+    height: 70vh;
+  }
+  .heroContent {
+    max-width: 60%;
+  }
+  .heroTitle{
+    margin-bottom: 20px; 
+    font-size: 5.6rem;
+  }
+  .heroText {
+    font-size: 1.2rem;
+  }
+}
+
+/* Tab responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero {
+    background-position: 50% center;
+    height: 70vh;
+  }
+
+  .heroContent {
+    max-width: 60%;
+  }
+
+  .heroTitle{
+    margin-bottom: 20px; 
+    font-size: 6rem;
+  }
+
+  .heroText {
+    font-size: 1.3rem;
+  }
+}
+
 /* Mobile responsiveness */
 @media (max-width: 480px){
 
@@ -131,6 +171,7 @@
   font-weight: 300;
   color: #111827;
   margin-bottom: 0.5;
+  font-family: Barlow, sans-serif;
 }
 
 .optionImgRenter {
@@ -154,17 +195,79 @@
 }
 
 .discripion {
-  font-size: 0.85rem;
+  font-size: 0.80rem;
   font-weight: 400;
   color: #374151;
   text-align: start;
 }
 
-/* Mobile Responsiveness */
+/* Small Laptop */
+@media 
+  (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .optionBox {
+    flex-direction: column;
+    width: 75%;
+    padding-bottom: 10px;
+    gap: 3rem;
+  }
+  .renter,
+  .owner{
+    justify-content: space-around;
+    align-items: self-start;
+    padding: 15px 25px;
+  }
 
+  .optionImgRenter,
+  .optionImgOwner {
+    height: 70%;
+    background-position: center;
+  }
+  .optionTitle{
+    font-size: 1.7rem;
+  }
+  .discripion {
+    font-size: 1.1rem;
+  }
+} 
+
+/* Tab responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .optionBox {
+    flex-direction: column;
+    width: 75%;
+  }
+
+  .renter,
+  .owner{
+    justify-content: space-around;
+    align-items: self-start;
+    padding: 15px 25px;
+  }
+
+  .optionImgRenter,
+  .optionImgOwner {
+    height: 70%;
+    background-position: center;
+  }
+
+  .optionTitle{
+    font-size: 1.7rem;
+  }
+
+  .discripion {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 480px) {
   .optionBox {
     flex-direction: column;
+  }
+
+  .renter,
+  .owner{
+    align-items: self-start;
   }
 }
 
@@ -172,7 +275,7 @@
 .howItWorks {
   width: 100%;
   height: 100vh;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem 2rem 1rem;
   background: #f8fafc;
   text-align: center;
 }
@@ -296,6 +399,74 @@
   top: -10px;
 }
 
+/* Small Laptop */
+@media 
+  (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .howItWorks {
+    height: auto;
+    padding: 4rem 1rem;
+  }
+  .sectionTitle{
+    font-size: 2.2rem; 
+    top: 0;
+    margin: 0.7rem;
+  }
+
+  .sectionSubtitle{
+    margin-bottom: 4rem;
+    font-size: 0.9rem;
+  }
+
+  .flowsContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    top: 0px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .flowCard {
+    width: 50%;
+    padding: 3rem 2.5rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+} 
+
+/* Tab responsiveness */
+@media (min-width: 481px) and (max-width: 768px){
+  .howItWorks {
+    height: auto;
+    padding: 4rem 1rem;
+  }
+  .sectionTitle{
+    font-size: 1.9rem; 
+    top: 0;
+    margin: 0.7rem;
+  }
+
+  .sectionSubtitle{
+    margin-bottom: 3rem;
+    font-size: 0.8rem;
+  }
+
+  .flowsContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    top: 0px;
+    position: relative;
+  }
+
+  .flowCard {
+    width: 60%;
+    padding: 2.5rem 2rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
   .howItWorks {
@@ -397,12 +568,11 @@
   filter: blur(120px);
 }
 
-
 /* Why Us Section */
 .WhyUsSection {
   width: 100%;
-  min-height: 100vh;
-  padding: 1.1rem 2rem;
+  height: 100vh;
+  padding: 1rem 2rem 2rem 2rem;
   background: #f8fafc;
   text-align: center;
   display: flex;
@@ -450,7 +620,7 @@
 
 .WhyUsText {
   max-width: 620px;
-  margin: 0.8rem auto 2rem;
+  margin: 0.6rem auto 2rem;
   font-size: 0.85rem;
   color: #475569;
   line-height: 1.5;
@@ -492,7 +662,6 @@
   display: block;
   padding-bottom: 0.8rem;
   font-size: 0.8rem;
-  color: #16a34a;
   font-weight: 500;
 }
 
@@ -510,7 +679,7 @@
   gap: 4rem;
   animation: scrollLeft 15s linear infinite;
   position: relative;
-  top: -5px;
+  top: -6px;
 }
 
 .item {
@@ -536,6 +705,66 @@
     transform: translateX(-50%);
   }
 } 
+
+/* Small Laptop */
+@media (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .WhyUsSection {
+    height: auto;
+    padding: 3rem 1rem;
+  }
+  .WhyUsTitle {
+    font-size: 2.2rem;
+  }
+  .WhyUsText{
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+  .previewSection {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:4rem;
+    padding: 20px 0;
+  }
+
+  .carCard {
+    width: 60%;
+    height: auto;
+  }
+
+  .carCard img {
+    height: 240px;  
+  }
+} 
+
+/* Tab responsivness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .WhyUsSection {
+    height: auto;
+    padding: 3rem 1rem;
+  }
+  .WhyUsText{
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .previewSection {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 20px 0;
+  }
+
+  .carCard {
+    width: 60%;
+    height: auto;
+  }
+
+  .carCard img {
+    height: 180px;  
+  }
+}
 
 /* CTA Section */
 .ctaSection {
@@ -591,6 +820,52 @@
 .secondaryBtn:hover {
   background: #020617;
   color: #ffffff;
+}
+
+/* Small Laptop */
+@media(min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .ctaSection {
+    padding: 4rem 1rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.9rem;
+  }
+
+  .ctaText {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
+} 
+
+/* Tab responsivness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .ctaSection {
+    padding: 3rem 1rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.7rem;
+  }
+
+  .ctaText {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+  }
 }
 
 /* Footer */
@@ -806,13 +1081,6 @@
   max-width: 360px;
 }
 
-.brandLogo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #CDFF65;
-  margin-bottom: 1.2rem;
-}
-
 .newsletterBox {
   display: flex;
   flex-direction: column;
@@ -879,6 +1147,103 @@
   font-size: 0.75rem;
   color: #94a3b8;
   text-align: center;
+}
+
+/* Small Laptop */
+@media (min-width: 720px)  and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .footer {
+    padding: 2.5rem 1rem;
+    height: auto; 
+  }
+
+  .footerTop {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .footerLinks {
+    gap: 2.4rem;
+  }
+
+  .linkColumn h4 {
+    font-size: 1.5rem;
+  }
+
+  .linkColumn li {
+    font-size: 0.8rem;
+  }
+
+  .footerBrand {
+    text-align: center;
+  }
+
+  .brandLogo {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .newsletter {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .newsletter input {
+    font-size: 0.8rem;
+  }
+
+  .footerBottom {
+    top: 0;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    text-align: center;
+  }
+} 
+
+/* Tab responsiveness */
+@media (min-width: 481px) and (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 1rem;
+    height: auto; 
+  }
+
+  .footerTop {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .footerLinks {
+    gap: 2rem;
+  }
+
+  .linkColumn h4 {
+    font-size: 1rem;
+  }
+
+  .linkColumn li {
+    font-size: 0.8rem;
+  }
+
+  .footerBrand {
+    text-align: center;
+  }
+
+  .newsletter {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .newsletter input {
+    font-size: 0.8rem;
+  }
+
+  .footerBottom {
+    top: 0;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    text-align: center;
+  }
 }
 
 /* Mobile responsiveness */
