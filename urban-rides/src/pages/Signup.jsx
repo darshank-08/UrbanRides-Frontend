@@ -69,6 +69,7 @@ const Signup = () => {
 
       const testApi = "http://localhost:8080/sign-in/owner";
       const ProdApi = "https://urban-rides-production.up.railway.app/api/auth/register";
+
       const res = await fetch( testApi,
         {
           method: "POST",
@@ -78,11 +79,12 @@ const Signup = () => {
       );
 
       let result = {};
-    try {
-      result = await res.json();
-    } catch {
-      result = {};
-    }
+      
+      try {
+        result = await res.json();
+      } catch {
+        result = {};
+      }
 
 
       if (!res.ok) {
@@ -115,53 +117,17 @@ const Signup = () => {
         <form className={styles.form} onSubmit={handleSubmit}>
 
           {/* BASIC INFO */}
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            className={styles.input}
-            value={data.fullName}
-            onChange={handleChange}
-          />
+          <input type="text" name="fullName" placeholder="Full Name" className={styles.input} value={data.fullName} onChange={handleChange}/>
 
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            className={styles.input}
-            value={data.username}
-            onChange={handleChange}
-          />
+          <input type="text" name="username" placeholder="Username" className={styles.input} value={data.username} onChange={handleChange}/>
 
-          <input
-            type="tel"
-            name="mobile"
-            placeholder="10-digit Mobile Number"
-            className={styles.input}
-            value={data.mobile}
-            onChange={handleChange}
-            maxLength="10"
-          />
+          <input type="tel" name="mobile" placeholder="10-digit Mobile Number" className={styles.input} value={data.mobile} onChange={handleChange} maxLength="10"/>
 
           {/* PASSWORD GROUP */}
           <div className={styles.passwordGroup}>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className={styles.input}
-              value={data.password}
-              onChange={handleChange}
-            />
+            <input type="password" name="password" placeholder="Password" className={styles.input} value={data.password} onChange={handleChange}/>
 
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              className={styles.input}
-              value={data.confirmPassword}
-              onChange={handleChange}
-            />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" className={styles.input} value={data.confirmPassword} onChange={handleChange}/>
           </div>
 
           <button
