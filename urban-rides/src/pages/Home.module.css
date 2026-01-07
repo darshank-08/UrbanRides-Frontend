@@ -52,6 +52,30 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* Big Screens */
+@media (min-width: 1025px) {
+  .hero {
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .heroContent {
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .heroTitle {
+    font-size: 7rem;
+    margin-bottom: 25px;
+  }
+
+  .heroText {
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+}
+
 /* Small Laptop */
 @media 
   (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
@@ -135,6 +159,34 @@
   font-style: italic;
 }
 
+/* Big Screens */
+@media (min-width: 1025px) {
+  .gapSection {
+    padding: 3rem 2rem;
+    background: #f8fafc;
+    text-align: center;
+  }
+
+  .gapTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 1rem;
+  }
+
+  .gapText {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .gapTextItalic {
+    font-style: italic;
+  }
+}
+
 /* Options section */
 .optionsSection {
   width: 100%;
@@ -199,6 +251,59 @@
   font-weight: 400;
   color: #374151;
   text-align: start;
+}
+
+/* Big Screens */
+@media (min-width: 1025px) {
+  .optionsSection {
+    height: 100vh;
+    padding: 2.5rem;
+    background: #171717;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .optionBox {
+    max-width: 1300px;
+    width: 90%;
+    height: 85vh;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .renter,
+  .owner {
+    flex: 1;
+    background: rgba(255, 242, 242, 0.982);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .optionImgRenter,
+  .optionImgOwner {
+    width: 100%;
+    height: 65%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 1.5rem;
+  }
+
+  .optionTitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #111827;
+  }
+
+  .discripion {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #374151;
+    text-align: start;
+  }
 }
 
 /* Small Laptop */
@@ -399,6 +504,67 @@
   top: -10px;
 }
 
+@media (min-width: 1025px) {
+  .howItWorks {
+    width: 100%;
+    height: 100vh;
+    padding: 4rem 2rem;
+    background: #f8fafc;
+    text-align: center;
+  }
+
+  .sectionTitle {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: #171717;
+  }
+
+  .sectionSubtitle {
+    max-width: 700px;
+    margin: 0.6rem auto 3.5rem;
+    font-size: 1rem;
+    color: #475569;
+  }
+
+  .flowsContainer {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .flowCard {
+    width: 35%;
+    padding: 2rem 2rem 3rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .flowTitle {
+    font-size: 2rem;
+  }
+
+  .stepsRow {
+    justify-content: space-evenly;
+  }
+
+  .step span {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .step p {
+    font-size: 0.9rem;
+  }
+
+  .line {
+    height: 3px;
+    margin: 0 1rem;
+    top: -12px;
+  }
+}
+
 /* Small Laptop */
 @media 
   (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
@@ -568,6 +734,18 @@
   filter: blur(120px);
 }
 
+/* Big Screens */
+@media (min-width: 1025px) {
+  .highlightContent {
+    max-width: 1200px;
+    text-align: center;
+ }
+  .highlightContent h3{
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+  }
+}
+
 /* Why Us Section */
 .WhyUsSection {
   width: 100%;
@@ -706,6 +884,79 @@
   }
 } 
 
+/* Big Screens */
+@media (min-width: 1025px) {
+  .WhyUsSection {
+    width: 100%;
+    height: 100vh;
+    padding: 4rem 3rem;
+    background: #f8fafc;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .WhyUsTitle {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #171717;
+    margin-bottom: 1rem;
+  }
+
+  .WhyUsText {
+    max-width: 720px;
+    margin: 1rem auto 3.4rem;
+    font-size: 1.1rem;
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .previewSection {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: nowrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .carCard {
+    width: 270px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .carCard img {
+    height: 170px;
+    object-fit: cover;
+  }
+
+  .carCard h4 {
+    font-size: 1rem;
+    margin: 0.8rem 0 0.3rem;
+    color: #171717;
+  }
+
+  .carCard span {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .scrollContainer {
+    padding: 1.5rem 0;
+  }
+
+  .scrollContent {
+    gap: 5rem;
+    animation: scrollLeft 18s linear infinite;
+  }
+
+  .item p {
+    font-size: 1rem;
+  }
+}
+
 /* Small Laptop */
 @media (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
   .WhyUsSection {
@@ -766,6 +1017,22 @@
   }
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .WhyUsSection {
+    padding: 2rem 1rem;
+    height: fit-content;
+  }
+  .WhyUsTitle {
+    font-size: 1.5rem;
+  }
+  .WhyUsText {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+}
+
 /* CTA Section */
 .ctaSection {
   width: 100%;
@@ -820,6 +1087,66 @@
 .secondaryBtn:hover {
   background: #020617;
   color: #ffffff;
+}
+
+@media (min-width: 1025px) {
+  .ctaSection {
+    width: 100%;
+    padding: 4rem 1.5rem;
+    background: #ffffff;
+    text-align: center;
+  }
+
+  .ctaTitle {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #020617;
+  }
+
+  .ctaText {
+    max-width: 700px;
+    margin: 1rem auto 2.5rem;
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+
+  .ctaButtons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .primaryBtn {
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
+    border-radius: 999px;
+    background: #020617;
+    color: #ffffff;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .secondaryBtn {
+    padding: 0.9rem 2.5rem;
+    font-size: 1rem;
+    border-radius: 999px;
+    border: 1.5px solid #020617;
+    background: transparent;
+    color: #020617;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .primaryBtn:hover {
+    opacity: 0.9;
+  }
+
+  .secondaryBtn:hover {
+    background: #020617;
+    color: #ffffff;
+  }
 }
 
 /* Small Laptop */
@@ -1013,140 +1340,65 @@
   text-align: left;
 }
 
-/* Footer */
-.footer {
-  width: 100%;
-  min-height: auto; 
-  background: #171717;
-  padding: 3rem 1.5rem 1rem;
-  color: #e5e7eb;
-  box-sizing: border-box;
-}
+/* Big Screens / Desktop */
+@media (min-width: 1025px) {
+  .footer {
+    padding: 4rem 2rem;
+    height: 100vh;
+  }
 
-/* Top Layout */
-.footerTop {
-  display: flex;
-  justify-content: space-between;
-  gap: 3rem;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: auto;
-}
+  .footerTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
 
-/* Left Columns */
-.footerLinks {
-  display: flex;
-  gap: 4rem;
-  align-items: flex-start; 
-}
+  .footerLinks {
+    display: flex;
+    gap: 3rem;
+  }
 
-.linkColumn h4 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: #CDFF65;
-}
+  .linkColumn h4 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
 
-.linkColumn ul {
-  list-style: none;
-  padding: 0;
-}
+  .linkColumn li {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
 
-.linkColumn li {
-  font-family: Lato, sans-serif;
-  font-size: 0.7rem;
-  margin-bottom: 0.5rem;
-  color: #f8fafc;
-  cursor: pointer;
-  position: relative;    
-  width: fit-content;   
-}
+  .footerBrand {
+    max-width: 480px;
+    text-align: left;
+  }
 
-.linkColumn li::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0px;
-  width: 0%;
-  height: 0.8px;
-  background-color: #ffffff;
-  transition: width 0.3s ease;
-}
+  .brandLogo {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #CDFF65;
+  }
 
-.linkColumn li:hover::after {
-  width: 100%;
-}
+  .newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 320px;
+  }
 
-.footerBrand {
-  max-width: 360px;
-}
+  .newsletter input {
+    font-size: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
 
-.newsletterBox {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.brandText {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #f8fafc;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
-  font-family: Barlow, sans-serif;
-}
-
-.newsletter {
-  display: flex;
-  align-items: center;
-  background: #282525bc;
-  padding: 0.3rem;
-  max-width: 250px;
-}
-
-.newsletter input {
-  flex: 1;
-  padding: 0.6rem 0.7rem;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #ffffffb9;
-  font-size: 0.7rem;
-  font-weight: 300;
-}
-
-.newsletter button {
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-  background: #CDFF65;
-  border: none;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #020617;
-
-  transition: transform 0.2s ease;
-}
-
-.newsletter button:hover {
-  transform: translateX(2px);
-}
-
-.footerBottom {
-  position: relative;
-  top: 70px; 
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 1px solid #1e293b;
-  font-size: 0.75rem;
-  color: #94a3b8;
-  text-align: center;
+  .footerBottom {
+    top: 190px;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+  }
 }
 
 /* Small Laptop */

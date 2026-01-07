@@ -25,6 +25,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .logo {
@@ -36,6 +38,7 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.2px;
+  color: #111827;
 }
 
 /* RIGHT */
@@ -59,6 +62,13 @@
 .loginBtn:hover {
   background: #000;
   transform: translateY(-1px);
+}
+
+@media (min-width: 1025px) {
+  .navbar {
+    width: 60%;
+  }
+  
 }
 
 @media (max-width: 1024px) {

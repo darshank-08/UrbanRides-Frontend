@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 import Navbar from "../components/Navbar.Jsx";
 import Creta from "../assets/Car_Creta.png";
@@ -206,8 +207,8 @@ const Home = () => {
           </p>
 
           <div className={styles.ctaButtons}>
-            <button className={styles.primaryBtn}>Explore Cars</button>
-            <button className={styles.secondaryBtn}>List Your Car</button>
+            <Link to="/login"><button className={styles.primaryBtn}>Explore Cars</button></Link>
+            <Link to="/login"><button className={styles.secondaryBtn}>List Your Car</button></Link>
           </div>
         </section>
 
