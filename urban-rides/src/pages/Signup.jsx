@@ -59,10 +59,11 @@ const Signup = () => {
 
     const payload = {
       fullName: data.fullName.trim(),
-      username: data.username.trim(),
-      mobile: data.mobile.trim(),
+      userName: data.username.trim(),           
+      phoneNumber: Number(data.mobile.trim()),
       password: data.password
     };
+
 
 
     try {
