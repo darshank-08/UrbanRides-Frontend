@@ -134,6 +134,7 @@ const Signup = () => {
 
       if(role === "User"){
         navigate("/login");
+        alert("Sign up successfull. Log in to continue")
       }else{
         alert("Please wait for approval from Super-Admin")
       }
