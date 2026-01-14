@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Navbar from "../components/SignupNavbar.jsx"
+import { useEffect } from 'react';
 
 const Login = () => {
 
@@ -117,8 +118,36 @@ const Login = () => {
     localStorage.setItem("user", result.userName);
     localStorage.setItem("roles", JSON.stringify(result.roles));
 
-    
-    navigate("/dashboard");
+    const RoleFromAPI = (result.roles[0]);
+    console.log(RoleFromAPI);
+
+    // if(userType === "ROLE_OWNER"){
+    //   navigate("/Owneer")
+    // }else if(userType === "ROLE_RENTER"){
+    //   navigate("/Renter")
+    // }
+
+    switch (RoleFromAPI) {
+      case "ROLE_OWNER":
+        navigate("/Owner")
+        break;
+        
+      case "ROLE_RENTER":
+        navigate("/Renter")
+        break;  
+
+      case "ROLE_ADMIN":
+        navigate("/Admin")
+        break; 
+
+      case "ROLE_SUPERADMIN":
+        navigate("/SuperAdmin")
+        break; 
+
+      default:
+        break;
+    }
+  
 
      } catch (error) {
       setError("Something went wrong")

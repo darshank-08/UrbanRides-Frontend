@@ -2,7 +2,7 @@ import './App.css'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
-import Dashboard from './pages/Dashboard.jsx'
+import Renter from './pages/Renter.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Renter" element={<Renter />} />
       </Routes>
     </Router>
   )

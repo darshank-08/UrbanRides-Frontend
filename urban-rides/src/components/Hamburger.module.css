@@ -1,0 +1,39 @@
+.hamburger {
+  position: fixed;
+  top: 22px;
+  left: 22px;
+
+  width: 44px;
+  height: 44px;
+
+  background: #0b0d12;
+  border: none;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  z-index: 1001;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.hamburger span {
+  font-size: 26px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* HOVER EFFECT */
+.hamburger:hover {
+  background: #151925;
+  transform: scale(1.05);
+}
+
+/* CLICK EFFECT */
+.hamburger:active {
+  transform: scale(0.95);
+}

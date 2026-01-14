@@ -1,0 +1,73 @@
+/* MAIN */
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  background: #f6f7f9;
+  font-family: system-ui, sans-serif;
+}
+
+.navigation {
+  width: 10%;
+  min-width: 70px;
+  height: 100vh;
+  background: #d2d2d27d;
+  position: relative;
+}
+
+.navigationContent {
+  position: fixed;
+  top: 0;
+  left: -100%;   /* PURE HIDE */
+  width: 30%;
+  min-width: 280px;
+  height: 100vh;
+
+  background: linear-gradient(180deg, #0b0d12, #06070a);
+  color: #fff;
+  padding: 40px 30px;
+
+  transition: left 0.35s ease;
+  z-index: 1000;
+
+  overflow-y: auto; 
+}
+
+/* ON CLICK SHOW */
+.show {
+  left: 0;
+}
+
+/* HEADER */
+.navHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.navHeader h2 {
+  font-size: 32px;
+}
+
+.close {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* MENU */
+.navMenu {
+  list-style: none;
+  padding: 0;
+}
+
+.navMenu li {
+  font-size: 22px;
+  margin-bottom: 35px;
+  cursor: pointer;
+  color: #d6d6d6;
+}
+
+.navMenu li:hover {
+  color: #fff;
+}
