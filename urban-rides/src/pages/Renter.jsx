@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Renter.module.css";
 import Hamburger from "../components/Hamburger";
 import CarCard from "../components/CarCard.jsx";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Renter = () => {
   const [open, setOpen] = useState(false);
@@ -14,8 +14,11 @@ const Renter = () => {
   const [seats, setSeats] = useState("");
   const [brand, setBrand] = useState("");
 
-
   const navigate = useNavigate();
+
+  const onCardClick = (carID) =>{
+    navigate(`/cars/${carID}`)
+  }
 
   const API = {
     testAPI : "http://localhost:8080/Renter/active-cars",
@@ -93,7 +96,7 @@ const Renter = () => {
     const filteredCars = cars.filter(
       (car) =>
         car.location.toLowerCase().includes(location.toLowerCase()) &&
-        car.company.toLowerCase().includes(brand.toLowerCase()) &&  
+        filterByBrand(car) &&
         filterByPrice(car) &&
         filterBySeats(car)
     );
@@ -191,7 +194,7 @@ const Renter = () => {
         <div className={styles.cardsWrapper}>
           {filteredCars && filteredCars.length > 0 ? (
             filteredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
+              <CarCard key={car.id} car={car} onClick={() => onCardClick(car.id)}/>
             ))
           ) : (
             <p>No cars available right now.</p>

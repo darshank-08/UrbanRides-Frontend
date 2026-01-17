@@ -1,8 +1,10 @@
 import styles from "./CarCard.module.css";
 
-const CarCard = ({ car }) => {
+
+const CarCard = ({ car, onClick  }) => {
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div
         className={styles.image}
         style={{
@@ -14,9 +16,9 @@ const CarCard = ({ car }) => {
           {car.company} {car.model}
         </h4>
         <p>
-          {car.location} • {car.seats} Seats
+          {car.location} • {car.seats} Seats
         </p>
-        <strong>₹{car.pricePerDay} / day</strong>
+        <strong>₹{car.pricePerDay} / day</strong>
       </div>
     </div>
   );
