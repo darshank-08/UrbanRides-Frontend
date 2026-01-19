@@ -96,7 +96,6 @@
 }
 
 /* Filters */
-
 .filters {
   display: flex;
   gap: 13px;
@@ -168,4 +167,212 @@
   text-align: center;
   color: #666;
   font-weight: 500;
+}
+
+/* Big Screens / Desktop */
+@media (min-width: 1025px) {
+  .content {
+    padding: 24px 48px;
+  }
+
+  .filters {
+    gap: 14px;
+  }
+
+  .cardsWrapper {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .navigationContent {
+    width: 26%;
+    min-width: 320px;
+  }
+
+  .navHeader h2 {
+    font-size: 34px;
+  }
+
+  .navMenu li {
+    font-size: 22px;
+  }
+}
+
+/* Small Laptop / Touch devices (coarse pointer, no hover) */
+@media (min-width: 720px) and (max-width: 1024px) and (pointer: coarse) and (hover: none) {
+  .navigation {
+    width: 12%;
+    min-width: 64px;
+  }
+
+  .navigationContent {
+    width: 40%;
+    min-width: 300px;
+    padding: 34px 24px;
+  }
+
+  .content {
+    padding: 20px 26px;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .input,
+  .select {
+    font-size: 0.85rem;
+    padding: 10px 38px 10px 16px;
+  }
+
+  .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .navHeader h2 {
+    font-size: 30px;
+  }
+
+  .navMenu li {
+    font-size: 20px;
+    margin-bottom: 28px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .navigation {
+    width: 100%;
+    min-width: 0;
+    height: 56px;
+  }
+
+  .navigationContent {
+    width: 70%;
+    min-width: 280px;
+    padding: 32px 22px;
+  }
+
+  .content {
+    padding: 18px 18px;
+  }
+
+  .Header h2 {
+    font-size: 1.35rem;
+  }
+
+  .Header p {
+    font-size: 0.8rem;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0px 12px;
+  }
+
+  .input,
+  .select {
+    font-size: 0.85rem;
+    padding: 10px 38px 10px 16px;
+  }
+
+  .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 18px;
+    padding-bottom: 30px;
+  }
+
+  .navHeader h2 {
+    font-size: 28px;
+  }
+
+  .navMenu li {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .main {
+    flex-direction: column;
+    padding: auto 5px;
+  }
+
+  .navigation {
+    width: 100%;
+    min-width: 0;
+    height: 56px;
+  }
+
+  .navigationContent {
+    width: 92%;
+    min-width: 0;
+    padding: 28px 18px;
+  }
+
+  .navHeader {
+    margin-bottom: 40px;
+  }
+
+  .navHeader h2 {
+    font-size: 24px;
+  }
+
+  .close {
+    font-size: 26px;
+  }
+
+  .navMenu li {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    padding: 14px 14px;
+  }
+
+  .Header h2 {
+    font-size: 1.25rem;
+  }
+
+  .Header p {
+    font-size: 0.78rem;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin: 16px 0px 12px;
+  }
+
+  .input,
+  .select {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 11px 42px 11px 16px;
+  }
+
+  .cardsWrapper {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 16px;
+    padding-bottom: 24px;
+  }
+
+  .loading,
+  .error {
+    padding: 40px 14px;
+    font-size: 16px;
+  }
 }

@@ -4,6 +4,8 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Renter from './pages/Renter.jsx'
 import CarDetails from './pages/CarDetails.jsx'
+import UPI from './pages/UPI.jsx' 
+import BookingBill from './pages/BookingBill.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/Renter" element={<Renter />} />
         <Route path="/cars/:carId" element={<CarDetails />} />
+        <Route path="/UPI" element={<UPI />} />
+        <Route path="/Bill" element={<BookingBill />} />
       </Routes>
     </Router>
   )
