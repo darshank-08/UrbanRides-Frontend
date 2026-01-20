@@ -173,19 +173,39 @@ const CarDetails = () => {
 
       if (!res.ok) throw new Error("Booking failed");
 
+      const data = await res.json();   // ⭐ VERY IMPORTANT
+      console.log("Booking response:", data);
+
+      // update busy dates
       setBusyDates((prev) => [
         ...prev,
-        { startDate: payload.startDate, endDate: payload.endDate },
+        {
+          startDate: payload.startDate,
+          endDate: payload.endDate,
+        },
       ]);
 
-      //preparing for next booking
+      // reset form
       setStartDate(null);
       setEndDate(null);
       setPaymentMethod(null);
 
-      //navigating according to payment method
-      if (paymentMethod === "UPI") navigate("/UPI");
-      if (paymentMethod === "COD") navigate("/Bill");
+      // navigate to bill page with backend data
+      if (data.booking.payment.method === "COD") {
+        navigate("/Bill", {
+          state: {
+            booking: data.booking,
+          },
+        });
+      }else if(data.booking.payment.method === "UPI"){
+        navigate("/UPI", {
+          state: {
+            booking: data.booking,
+            amount: totalPrice,
+          },
+        });
+      }
+
     } catch (err) {
       console.error(err);
     } finally {

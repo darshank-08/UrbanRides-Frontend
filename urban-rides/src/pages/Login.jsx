@@ -121,12 +121,6 @@ const Login = () => {
     const RoleFromAPI = (result.roles[0]);
     console.log(RoleFromAPI);
 
-    // if(userType === "ROLE_OWNER"){
-    //   navigate("/Owneer")
-    // }else if(userType === "ROLE_RENTER"){
-    //   navigate("/Renter")
-    // }
-
     switch (RoleFromAPI) {
       case "ROLE_OWNER":
         navigate("/Owner")

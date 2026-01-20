@@ -4,8 +4,8 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Renter from './pages/Renter.jsx'
 import CarDetails from './pages/CarDetails.jsx'
-import UPI from './pages/UPI.jsx' 
-import BookingBill from './pages/BookingBill.jsx'
+import UPI from './pages/DummyUPI.jsx' 
+import BookingBill from './pages/Bill.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
