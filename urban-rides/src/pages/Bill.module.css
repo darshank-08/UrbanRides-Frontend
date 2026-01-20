@@ -5,13 +5,14 @@ body{
 }
 
 .invoiceWrapper {
-  min-height: 100vh;
+  min-height: fit-content;
   background: #f4f6f8;
   display: flex;
   align-items: center;
   justify-content: center;
   justify-self: center;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .invoiceCard {
@@ -138,5 +139,104 @@ hr {
 @media print {
   .invoiceFooter button {
     display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .invoiceCard {
+    max-width: 520px;
+    padding: 22px;
+  }
+
+  .invoiceHeader h1 {
+    font-size: 1.4rem;
+  }
+
+  .row {
+    font-size: 0.85rem;
+  }
+
+  .total {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .invoiceWrapper {
+    padding: 16px;
+  }
+
+  .invoiceCard {
+    max-width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .invoiceHeader {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .invoiceMeta {
+    text-align: left;
+  }
+
+  .invoiceHeader h1 {
+    font-size: 1.3rem;
+  }
+
+  .section h3 {
+    font-size: 1rem;
+  }
+
+  .row {
+    font-size: 0.85rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+  }
+
+  .invoiceWrapper {
+    padding: 12px;
+  }
+
+  .invoiceCard {
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .invoiceHeader h1 {
+    font-size: 1.15rem;
+  }
+
+  .invoiceHeader p {
+    font-size: 0.8rem;
+  }
+
+  .section h3 {
+    font-size: 0.95rem;
+  }
+
+  .row {
+    font-size: 0.82rem;
+  }
+
+  .total {
+    font-size: 1.05rem;
+  }
+
+  .invoiceFooter p {
+    font-size: 0.85rem;
+  }
+
+  .invoiceFooter button {
+    width: 100%;
+    padding: 12px;
+    font-size: 0.9rem;
   }
 }
