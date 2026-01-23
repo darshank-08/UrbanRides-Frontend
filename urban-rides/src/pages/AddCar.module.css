@@ -1,0 +1,418 @@
+.wrapper {
+  min-height: 100vh;
+  background: #f4f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  padding: 24px 22px 26px;
+  border-radius: 14px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+  border: 1px solid #e5e7eb;
+}
+
+.card h2 {
+  text-align: center;
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.card p {
+  text-align: center;
+  font-size: 12px;
+  margin: 0 0 18px;
+  color: #6b7280;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card input,
+.card select {
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+  outline: none;
+  background-color: #f9fafb;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.card input::placeholder {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.card select {
+  color: #374151;
+}
+
+.card input:focus,
+.card select:focus {
+  border-color: #111827;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #1118271a;
+}
+
+.card label {
+  font-size: 12px;
+  color: #4b5563;
+  margin-top: 4px;
+}
+
+.card button {
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+.card button:hover:not(:disabled) {
+  background: #020617;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.25);
+  transform: translateY(-1px);
+}
+
+.card button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.uploadGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.uploadLabel {
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileBox {
+  border-radius: 10px;
+  border: 1px dashed #d1d5db;
+  padding: 10px 12px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease,
+    box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.fileBox:hover {
+  border-color: #111827;
+  background-color: #f3f4f6;
+  box-shadow: 0 0 0 1px #1118271a;
+}
+
+.fileTitle {
+  font-size: 13px;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.fileHint {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.fileInfo {
+  font-size: 11px;
+  color: #4b5563;
+  margin-top: 2px;
+}
+
+/* Error message */
+.error {
+  background: #fef2f2;
+  color: #b91c1c;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border: 1px solid #fecaca;
+}
+
+/* Image preview grid */
+.previewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.previewItem {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+}
+
+.previewImage {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hero selection buttons */
+.heroButton,
+.heroButtonActive {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 4px 6px;
+  font-size: 10px;
+  cursor: pointer;
+  color: #4b5563;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.heroButtonActive {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.heroButton:hover:not(.heroButtonActive) {
+  background: #e5e7eb;
+}
+
+/* Big Screens / Desktop */
+@media (min-width: 1025px) {
+  .wrapper {
+    padding: 40px 24px;
+  }
+
+  .card {
+    max-width: 480px;
+    padding: 24px 24px 28px;
+  }
+
+  .card h2 {
+    font-size: 1.35rem;
+  }
+
+  .card p {
+    font-size: 0.8rem;
+  }
+
+  .previewImage {
+    height: 90px;
+  }
+}
+
+/* Small Laptop / Touch devices (coarse pointer, no hover) */
+@media
+  (min-width: 720px) and (max-width: 1024px) and
+  (pointer: coarse) and (hover: none) {
+
+  .wrapper {
+    align-items: center;
+    padding: 32px 16px;
+    min-height: 100vh;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 60%;
+    padding: 22px 20px 24px;
+    border-radius: 14px;
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.18);
+  }
+
+  .card h2 {
+    font-size: 1.4rem;
+  }
+
+  .card p {
+    font-size: 0.78rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .card input,
+  .card select {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .card button {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+
+  .previewGrid {
+    gap: 8px;
+  }
+
+  .previewImage {
+    height: 88px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .wrapper {
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 100vh;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 70%;
+    padding: 20px 18px 22px;
+    border-radius: 12px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  }
+
+  .card h2 {
+    font-size: 1.35rem;
+  }
+
+  .card p {
+    font-size: 0.75rem;
+    max-width: 85%;
+    margin: 0 auto 1.4rem auto;
+  }
+
+  .card input,
+  .card select {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.85rem;
+  }
+
+  .card button {
+    font-size: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  .uploadLabel {
+    font-size: 0.75rem;
+  }
+
+  .fileTitle {
+    font-size: 0.8rem;
+  }
+
+  .fileHint,
+  .fileInfo {
+    font-size: 0.7rem;
+  }
+
+  .previewGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .previewImage {
+    height: 80px;
+  }
+
+  .heroButton,
+  .heroButtonActive {
+    font-size: 0.7rem;
+    padding: 3px 5px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 1rem;
+    min-height: 100svh;
+    align-items: flex-start;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 95%;
+    padding: 1.4rem 1.1rem 1.6rem;
+    border-radius: 12px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
+    margin-top: 1.8rem;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.7rem;
+  }
+
+  .card input,
+  .card select {
+    font-size: 0.78rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .card button {
+    font-size: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  .uploadLabel {
+    font-size: 0.7rem;
+  }
+
+  .fileTitle {
+    font-size: 0.78rem;
+  }
+
+  .fileHint,
+  .fileInfo {
+    font-size: 0.68rem;
+  }
+
+  .previewGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .previewImage {
+    height: 68px;
+  }
+
+  .heroButton,
+  .heroButtonActive {
+    font-size: 0.65rem;
+    padding: 3px 4px;
+  }
+
+  .error {
+    font-size: 0.7rem;
+    padding: 0.55rem 0.7rem;
+  }
+}
