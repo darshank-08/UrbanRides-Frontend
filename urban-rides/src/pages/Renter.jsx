@@ -49,7 +49,7 @@ const Renter = () => {
         setCars(data);  
       } catch (err) {
         console.error("Failed to fetch cars:", err);
-        setError("Could not load car data.");
+        setError(err);
       } finally {
         setLoading(false);
       }
@@ -110,7 +110,7 @@ const Renter = () => {
 
 
   if (loading) return <p className={styles.loading}>Loading cars…</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
+  if (error) return <p className={styles.error}>Cars are not available.</p>;
 
   return (
     <div className={styles.main}>

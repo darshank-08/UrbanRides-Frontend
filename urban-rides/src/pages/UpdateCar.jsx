@@ -1,7 +1,15 @@
-import { useState } from "react";
-import styles from "./AddCar.module.css";
+import { useEffect, useState } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import styles from "./AddCar.module.css"; 
 
-const AddCar = () => {
+const UpdateCar = () => {
+  const { id: carId } = useParams();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const initialCar = location.state?.car || null;
+
   const [data, setData] = useState({
     company: "",
     model: "",
@@ -16,12 +24,49 @@ const AddCar = () => {
     features: ""
   });
 
+  // existing data 
+  const [existingImages, setExistingImages] = useState([]);
+  const [existingDocument, setExistingDocument] = useState("");
+
+  // new uploads
   const [imageFiles, setImageFiles] = useState([]);
   const [heroIndex, setHeroIndex] = useState(0);
   const [documentFile, setDocumentFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  // Already present data
+  useEffect(() => {
+    if (initialCar) {
+      setData({
+        company: initialCar.company || "",
+        model: initialCar.model || "",
+        year: initialCar.year != null ? String(initialCar.year) : "",
+        pricePerDay:
+          initialCar.pricePerDay != null
+            ? String(initialCar.pricePerDay)
+            : "",
+        location: initialCar.location || "",
+        seats: initialCar.seats != null ? String(initialCar.seats) : "",
+        approxMileage:
+          initialCar.approxMileage != null
+            ? String(initialCar.approxMileage)
+            : "",
+        condition: initialCar.condition || "",
+        fuelType: initialCar.fuelType || "",
+        transmission: initialCar.transmission || "",
+        features:
+          Array.isArray(initialCar.features) && initialCar.features.length > 0
+            ? initialCar.features.join(", ")
+            : ""
+      });
+
+      setExistingImages(initialCar.images || []);
+      setExistingDocument(initialCar.document || "");
+      setHeroIndex(0);
+    }
+  }, [initialCar]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +83,7 @@ const AddCar = () => {
     setDocumentFile(e.target.files[0] || null);
   };
 
+  // File upload helper
   const uploadFile = async (file) => {
     const formData = new FormData();
     formData.append("image", file);
@@ -64,27 +110,24 @@ const AddCar = () => {
     setLoading(true);
 
     try {
-      if (imageFiles.length === 0) {
-        setError("Please select at least one car image.");
-        setLoading(false);
-        return;
+      let finalImageUrls = existingImages;
+
+      if (imageFiles.length > 0) {
+        const orderedFiles = [
+          imageFiles[heroIndex],
+          ...imageFiles.filter((_, idx) => idx !== heroIndex)
+        ];
+
+        finalImageUrls = await Promise.all(
+          orderedFiles.map((file) => uploadFile(file))
+        );
       }
-      if (!documentFile) {
-        setError("Please upload RC / Insurance PDF.");
-        setLoading(false);
-        return;
+
+      let finalDocumentUrl = existingDocument;
+
+      if (documentFile) {
+        finalDocumentUrl = await uploadFile(documentFile);
       }
-
-      const orderedFiles = [
-        imageFiles[heroIndex],
-        ...imageFiles.filter((_, idx) => idx !== heroIndex)
-      ];
-
-      const imageUrls = await Promise.all(
-        orderedFiles.map((file) => uploadFile(file))
-      );
-
-      const documentUrl = await uploadFile(documentFile);
 
       const payload = {
         company: data.company,
@@ -100,17 +143,17 @@ const AddCar = () => {
         features: data.features
           ? data.features.split(",").map((f) => f.trim()).filter(Boolean)
           : [],
-        images: imageUrls,
-        document: documentUrl
+        images: finalImageUrls,
+        document: finalDocumentUrl
       };
 
       const API = {
-        test: "http://localhost:8080/Owner/add-cars",
-        prod: "https://urban-rides-production.up.railway.app/car/add"
+        test: `http://localhost:8080/Owner/update-car/${carId}`,
+        prod: `https://urban-rides-production.up.railway.app/Owner/update-car/${carId}`
       };
 
       const res = await fetch(API.test, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -121,25 +164,62 @@ const AddCar = () => {
       const result = await res.json();
 
       if (!res.ok) {
-        setError(result.message || "Failed to add car");
+        setError(result.message || "Failed to update car");
         return;
       }
 
-      alert("Car added successfully. Waiting for admin approval.");
+      alert("Car updated successfully.");
       navigate("/Owner");
     } catch (err) {
       console.error(err);
-      setError("Something went wrong while uploading/adding car");
+      setError("Something went wrong while updating car");
     } finally {
       setLoading(false);
     }
   };
 
+  if (!initialCar) {
+    return (
+      <p className={styles.error}>No car data. Try opening from Owner page.</p>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <h2>Add New Car</h2>
-        <p>Fill in the details to add a new car to your fleet.</p>
+        <h2>Update Car</h2>
+        <p>
+          This is your current car. Update details only if something has
+          changed.
+        </p>
+
+        {/* Current car summary */}
+        <div className={styles.currentSummary}>
+          <span className={styles.currentSummaryLabel}>Current listing:</span>
+
+          <div className={styles.currentSummaryCard}>
+            {existingImages[0] && (
+              <img
+                src={existingImages[0]}
+                alt="Current hero"
+                className={styles.currentSummaryImage}
+              />
+            )}
+
+            <div className={styles.currentSummaryText}>
+              <div className={styles.currentSummaryTitle}>
+                {initialCar.company} {initialCar.model}
+              </div>
+              <div className={styles.currentSummaryMeta}>
+                {initialCar.location} • {initialCar.seats} seats •{" "}
+                {initialCar.year}
+              </div>
+              <div className={styles.currentSummaryPrice}>
+                ₹{initialCar.pricePerDay} / day
+              </div>
+            </div>
+          </div>
+        </div>
 
         {error && <p className={styles.error}>{error}</p>}
 
@@ -147,58 +227,77 @@ const AddCar = () => {
           <input
             name="company"
             placeholder="Company (e.g. Toyota)"
+            value={data.company}
             onChange={handleChange}
           />
           <input
             name="model"
             placeholder="Model (e.g. Fortuner)"
+            value={data.model}
             onChange={handleChange}
           />
           <input
             type="number"
             name="year"
             placeholder="Manufacturing Year"
+            value={data.year}
             onChange={handleChange}
           />
           <input
             type="number"
             name="pricePerDay"
             placeholder="Price per day ₹"
+            value={data.pricePerDay}
             onChange={handleChange}
           />
           <input
             name="location"
             placeholder="Car Location"
+            value={data.location}
             onChange={handleChange}
           />
           <input
             type="number"
             name="seats"
             placeholder="Seats"
+            value={data.seats}
             onChange={handleChange}
           />
           <input
             type="number"
             name="approxMileage"
             placeholder="Mileage (km/l)"
+            value={data.approxMileage}
             onChange={handleChange}
           />
 
-          <select name="condition" onChange={handleChange}>
+          <select
+            name="condition"
+            value={data.condition}
+            onChange={handleChange}
+          >
             <option value="">Condition</option>
             <option value="EXCELLENT">Excellent</option>
             <option value="GOOD">Good</option>
             <option value="AVERAGE">Average</option>
           </select>
 
-          <select name="fuelType" onChange={handleChange}>
+          <select
+            name="fuelType"
+            value={data.fuelType}
+            onChange={handleChange}
+          >
             <option value="">Fuel Type</option>
             <option value="PETROL">Petrol</option>
             <option value="DIESEL">Diesel</option>
             <option value="ELECTRIC">Electric</option>
           </select>
 
-          <select name="transmission" onChange={handleChange}>
+          <select
+            name="transmission"
+            value={data.transmission}
+            onChange={handleChange}
+          >
             <option value="">Transmission</option>
             <option value="MANUAL">Manual</option>
             <option value="AUTOMATIC">Automatic</option>
@@ -207,17 +306,20 @@ const AddCar = () => {
           <input
             name="features"
             placeholder="Features (AC, GPS, Airbags)"
+            value={data.features}
             onChange={handleChange}
           />
 
-          {/* Images & preview */}
+          {/* NEW Images upload (optional) */}
           <div className={styles.uploadGroup}>
-            <span className={styles.uploadLabel}>Car Images</span>
+            <span className={styles.uploadLabel}>
+              Car Images (leave empty to keep existing)
+            </span>
 
             <label className={styles.fileBox} htmlFor="carImages">
-              <span className={styles.fileTitle}>Upload car photos</span>
+              <span className={styles.fileTitle}>Upload new car photos</span>
               <span className={styles.fileHint}>
-                Click to choose – you can select multiple images
+                If you select new images, old ones will be replaced
               </span>
             </label>
 
@@ -232,13 +334,11 @@ const AddCar = () => {
 
             {imageFiles.length > 0 && (
               <>
-                {/* Singular or plural */}
                 <p className={styles.fileInfo}>
                   {imageFiles.length} image
                   {imageFiles.length > 1 ? "s" : ""} selected
                 </p>
 
-                {/* Preview grid */}
                 <div className={styles.previewGrid}>
                   {imageFiles.map((file, idx) => (
                     <div key={idx} className={styles.previewItem}>
@@ -265,11 +365,16 @@ const AddCar = () => {
             )}
           </div>
 
+          {/* Document upload (optional) */}
           <div className={styles.uploadGroup}>
-            <span className={styles.uploadLabel}>RC / Insurance Document</span>
+            <span className={styles.uploadLabel}>
+              RC / Insurance Document (leave empty to keep existing)
+            </span>
 
             <label className={styles.fileBox} htmlFor="rcDocument">
-              <span className={styles.fileTitle}>Upload RC / Insurance PDF</span>
+              <span className={styles.fileTitle}>
+                Upload new RC / Insurance PDF
+              </span>
               <span className={styles.fileHint}>PDF only</span>
             </label>
 
@@ -281,13 +386,19 @@ const AddCar = () => {
               onChange={handleDocumentChange}
             />
 
-            {documentFile && (
+            {documentFile ? (
               <p className={styles.fileInfo}>Selected: {documentFile.name}</p>
+            ) : (
+              existingDocument && (
+                <p className={styles.fileInfo}>
+                  Current: {existingDocument.split("/").pop()}
+                </p>
+              )
             )}
           </div>
 
           <button disabled={loading}>
-            {loading ? "Submitting..." : "Add Car"}
+            {loading ? "Updating..." : "Update Car"}
           </button>
         </form>
       </div>
@@ -295,4 +406,4 @@ const AddCar = () => {
   );
 };
 
-export default AddCar;
+export default UpdateCar;

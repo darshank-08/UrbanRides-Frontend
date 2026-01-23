@@ -129,8 +129,15 @@
   color: #555;
 }
 
-.carCard button {
-  margin: auto 14px 14px;
+.carCardButtons{
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.carCardButtons button {
+  width: calc(100% - 24px);
+  margin: auto 12px 14px;
   padding: 10px 0;
   border: none;
   border-radius: 10px;

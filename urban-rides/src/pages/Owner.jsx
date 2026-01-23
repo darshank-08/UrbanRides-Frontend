@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Owner = () => {
   const [open, setOpen] = useState(false);
   const [cars, setCars] = useState([]);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [dltConfirm, setDltConfirm] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Owner = () => {
 
         const data = await response.json();
         console.log("Owner cars:", data);
-        setCars(data); // ✅ sirf cars array set karo
+        setCars(data); 
       } catch (err) {
         console.error(err);
         setError("Could not load your cars");
@@ -53,8 +53,41 @@ const Owner = () => {
     navigate("/Owner/Add-Cars");
   };
 
+  const deleteClickHandler = async (carID) => {
+    setDltConfirm(true);
+    if (!window.confirm("Are you sure you want to delete this car?")) {
+      setDltConfirm(false);
+      return;
+    }
+
+    const API = {
+      test: `http://localhost:8080/Owner/delete-car/${carID}`,
+      prod: "https://urban-rides-production.up.railway.app/Owner/delete-car/",
+    }
+
+    try {
+      const token = localStorage.getItem("token"); 
+      const response = await fetch(`${API.test}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete car");
+      }
+      setCars(cars.filter((car) => car.id !== carID));
+      alert("Car deleted successfully");
+    } catch (err) {
+      console.error(err);
+      alert("Can't delete. You have Bookings to complete ");
+    } finally {
+      setDltConfirm(false);
+    }
+  }
+
   if (loading) return <p className={styles.loading}>Loading cars...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
     <div className={styles.main}>
@@ -99,9 +132,19 @@ const Owner = () => {
                     {car.company} {car.model}
                   </h3>
                   <p>₹{car.pricePerDay} / day</p>
-                  <button onClick={() => navigate(`/owner/car/${car.id}`)}>
-                    Manage
-                  </button>
+
+                  <div className={styles.carCardButtons}>
+                    <button onClick={() => navigate(`/Owner/Update-Car/${car.id}`, {
+                      state: { car },
+                    })}>
+                      Update
+                    </button>
+
+                    <button onClick={() => deleteClickHandler(car.id)}>
+                      Delete
+                    </button>
+                  </div>
+
                 </div>
               );
             })}

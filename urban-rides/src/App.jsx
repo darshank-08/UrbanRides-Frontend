@@ -8,6 +8,7 @@ import CarDetails from './pages/CarDetails.jsx'
 import UPI from './pages/DummyUPI.jsx' 
 import BookingBill from './pages/Bill.jsx'
 import AddCar from './pages/AddCar.jsx'
+import UpdateCar from './pages/UpdateCar.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         {/* Owner Routes */}
         <Route path="/Owner" element={<Owner />} />
         <Route path="/Owner/Add-Cars" element={<AddCar />} />
+        <Route path="/Owner/Update-Car/:id" element={<UpdateCar />} />
 
       </Routes>
     </Router>
