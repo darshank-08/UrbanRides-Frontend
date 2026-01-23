@@ -70,6 +70,7 @@ const CarDetails = () => {
 
         const data = await response.json();
         setDetails(data.carDetails);
+        console.log("Car details fetched:", data);
         setBusyDates(data.bookedDates || []);
       } catch {
         setError("Unable to load car details");
@@ -173,7 +174,7 @@ const CarDetails = () => {
 
       if (!res.ok) throw new Error("Booking failed");
 
-      const data = await res.json();   // ⭐ VERY IMPORTANT
+      const data = await res.json();  
       console.log("Booking response:", data);
 
       // update busy dates
@@ -223,16 +224,24 @@ const CarDetails = () => {
       {/* IMG & Actions */}
       <div className={styles.imgAction}>
         <div className={styles.img}>
-          <img
-            src={`/images/${details.images[currentIndex]}`}
-            alt={`${details.company} ${details.model}`}
-          />
-
-          {details.images.length > 1 && (
+          {details.images && details.images.length > 0 ? (
             <>
-              <button className={styles.prevBtn} onClick={prevImage}>‹</button>
-              <button className={styles.nextBtn} onClick={nextImage}>›</button>
+              <img
+                src={details.images[currentIndex]}  
+                alt={`${details.company} ${details.model}`}
+              />
+
+              {details.images.length > 1 && (
+                <>
+                  <button className={styles.prevBtn} onClick={prevImage}><span>‹</span></button>
+                  <button className={styles.nextBtn} onClick={nextImage}><span>›</span></button>
+                </>
+              )}
             </>
+          ) : (
+            <div className={styles.noImage}>
+              No image available
+            </div>
           )}
         </div>
 

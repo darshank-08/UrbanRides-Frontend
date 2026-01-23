@@ -1,14 +1,13 @@
 import styles from "./CarCard.module.css";
 
-
-const CarCard = ({ car, onClick  }) => {
-
+const CarCard = ({ car, onClick }) => {
+  const imageUrl = car.images?.[0]; 
   return (
     <div className={styles.card} onClick={onClick}>
       <div
         className={styles.image}
         style={{
-          backgroundImage: `url(http://localhost:8080/images/cars/${car.images?.[0]})`,
+          backgroundImage: imageUrl ? `url("${imageUrl}")` : "none",
         }}
       />
       <div className={styles.content}>
@@ -24,4 +23,4 @@ const CarCard = ({ car, onClick  }) => {
   );
 };
 
-export default CarCard; 
+export default CarCard;

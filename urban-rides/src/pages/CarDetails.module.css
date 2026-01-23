@@ -39,6 +39,8 @@
 .nextBtn {
   position: absolute;
   top: 50%;
+  width: 30px;
+  height: 30px;
   transform: translateY(-50%);
   background: transparent;
   border: none;
@@ -47,7 +49,8 @@
   color: #111;
   cursor: pointer;
   padding: 5px;
-  line-height: 1;
+  background-color: #e0e0e0;
+  border-radius: 50%;
 }
 
 .prevBtn {
@@ -56,6 +59,16 @@
 
 .nextBtn {
   right: 12px;
+}
+
+.prevBtn span{
+  position: relative;
+  top: -15px;
+}
+
+.nextBtn span{
+  position: relative;
+  top: -15px; 
 }
 
 .prevBtn:focus,
@@ -593,6 +606,7 @@
   .nextBtn {
     font-size: 32px;
     padding: 10px;
+    background-color: #e0e0e0;
   }
 
   .prevBtn {
