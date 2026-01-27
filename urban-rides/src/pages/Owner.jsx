@@ -6,40 +6,36 @@ import { useNavigate } from "react-router-dom";
 const Owner = () => {
   const [open, setOpen] = useState(false);
   const [cars, setCars] = useState([]);
+  const [filteredCars, setFilteredCars] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [dltConfirm, setDltConfirm] = useState(false);
+  const [view, setView] = useState("ALL");
 
   const navigate = useNavigate();
 
   const API = {
-    testAPI: "http://localhost:8080/Owner/cars",
-    prodAPI: "https://urban-rides-production.up.railway.app/Owner/cars",
+    test: "http://localhost:8080/Owner/cars",
+    prod: "https://urban-rides-production.up.railway.app/Owner/cars",
   };
 
+  // Fetch all cars
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(API.testAPI, {
-          method: "GET",
+        const response = await fetch(API.test, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          credentials: "include",
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch cars");
-        }
+        if (!response.ok) throw new Error();
 
         const data = await response.json();
-        console.log("Owner cars:", data);
-        setCars(data); 
+        setCars(data);
+        setFilteredCars(data);
       } catch (err) {
-        console.error(err);
-        setError("Could not load your cars");
+        console.error("Failed to fetch cars");
       } finally {
         setLoading(false);
       }
@@ -48,44 +44,54 @@ const Owner = () => {
     fetchCars();
   }, []);
 
-  const goToAddCar = () => {
-    setOpen(false);
-    navigate("/Owner/Add-Cars");
-  };
-
-  const deleteClickHandler = async (carID) => {
-    setDltConfirm(true);
-    if (!window.confirm("Are you sure you want to delete this car?")) {
-      setDltConfirm(false);
-      return;
+  // Filter based on status
+  useEffect(() => {
+    if (view === "ALL") {
+      setFilteredCars(cars);
+      console.log(cars);  
+    } else if (view === "ACTIVE") {
+      setFilteredCars(cars.filter(car => car.status === "ACTIVE"));
+      console.log(cars);
+    } else if (view === "PENDING") {
+      setFilteredCars(cars.filter(car => car.status === "PENDING_APPROVAL"));
+      console.log(cars);
+    } else if (view === "REJECTED") {
+      setFilteredCars(cars.filter(car => car.status === "REJECT"));
+      console.log(cars);
     }
+  }, [view, cars]);
 
-    const API = {
-      test: `http://localhost:8080/Owner/delete-car/${carID}`,
-      prod: "https://urban-rides-production.up.railway.app/Owner/delete-car/",
-    }
+  
+
+  const deleteClickHandler = async (carId) => {
+    if (!window.confirm("Are you sure you want to delete this car?")) return;
+
+    const deleteAPI = {
+      test: `http://localhost:8080/Owner/car/${carId}`,
+      prod: `https://urban-rides-production.up.railway.app/car/${carId}`,
+    } 
 
     try {
-      const token = localStorage.getItem("token"); 
-      const response = await fetch(`${API.test}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error("Failed to delete car");
-      }
-      setCars(cars.filter((car) => car.id !== carID));
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        deleteAPI.test,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error();
+
+      setCars(prev => prev.filter(car => car.id !== carId));
       alert("Car deleted successfully");
-    } catch (err) {
-      console.error(err);
-      alert("Can't delete. You have Bookings to complete ");
-    } finally {
-      setDltConfirm(false);
+    } catch {
+      alert("Can't delete. Active bookings exist.");
     }
-  }
+  };
 
   if (loading) return <p className={styles.loading}>Loading cars...</p>;
 
@@ -98,61 +104,83 @@ const Owner = () => {
         <div className={`${styles.navigationContent} ${open ? styles.show : ""}`}>
           <div className={styles.navHeader}>
             <h2>OWNER</h2>
-            <span className={styles.close} onClick={() => setOpen(false)}>
-              ✕
-            </span>
+            <span onClick={() => setOpen(false)}>✕</span>
           </div>
 
           <ul className={styles.navMenu}>
-            <li onClick={() => setOpen(false)}>My Cars</li>
-            <li onClick={goToAddCar}>Add New Car</li>
+            <li onClick={() => { setView("ALL"); setOpen(false); }}>
+              My Cars
+            </li>
+
+            <li onClick={() => navigate("/Owner/Add-Cars")}>
+              Add New Car
+            </li>
+
+            <li onClick={() => { setView("PENDING"); setOpen(false); }}>
+              Pending Cars
+            </li>
+
+            <li onClick={() => { setView("REJECTED"); setOpen(false); }}>
+              Rejected Cars
+            </li>
           </ul>
         </div>
       </div>
 
       {/* CONTENT */}
       <div className={styles.content}>
-        <h2 className={styles.contentHeader}>Owner Dashboard</h2>
-        {cars.length === 0 ? (
-          <p>No cars listed yet</p>
+        <h2>
+          {view === "ALL" && "All Cars"}
+          {view === "ACTIVE" && "Active Cars"}
+          {view === "PENDING" && "Pending Cars"}
+          {view === "REJECTED" && "Rejected Cars"}
+        </h2>
+
+        {filteredCars.length === 0 ? (
+          <p>No cars found</p>
         ) : (
           <div className={styles.carGrid}>
-            {cars.map((car) => {
-              const imageUrl = car.images && car.images.length > 0 ? car.images[0] : null; 
+            {filteredCars.map(car => (
+              <div key={car.id} className={styles.carCard}>
+                {car.images?.[0] ? (
+                  <img src={car.images[0]} alt={car.model} />
+                ) : (
+                  <div className={styles.noImage}>No Image</div>
+                )}
 
-              return (
-                <div key={car.id} className={styles.carCard}>
-                  {imageUrl ? (
-                    <img src={imageUrl} alt={car.model} />
-                  ) : (
-                    <div className={styles.noImage}>No image</div>
-                  )}
+                <h3>{car.company} {car.model}</h3>
+                <p>₹{car.pricePerDay} / day</p>
+                <p>Status: {car.status}</p>
 
-                  <h3>
-                    {car.company} {car.model}
-                  </h3>
-                  <p>₹{car.pricePerDay} / day</p>
+                <div className={styles.carCardButtons}>
+                  <button
+                    className={styles.updateBtn}
+                    disabled={car.status !== "ACTIVE"}
+                    onClick={() =>
+                      navigate(`/Owner/Update-Car/${car.id}`, {
+                        state: { car },
+                      })
+                    }
+                  >
+                    Update
+                  </button>
 
-                  <div className={styles.carCardButtons}>
-                    <button onClick={() => navigate(`/Owner/Update-Car/${car.id}`, {
-                      state: { car },
-                    })}>
-                      Update
-                    </button>
-
-                    <button onClick={() => deleteClickHandler(car.id)}>
-                      Delete
-                    </button>
-                  </div>
-
+                  <button
+                    className={styles.deleteBtn}
+                    disabled={car.status !== "ACTIVE"}
+                    onClick={() => deleteClickHandler(car.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         )}
       </div>
     </div>
   );
-};
+}
 
-export default Owner;
+export default Owner
+

@@ -7,33 +7,28 @@
   font-family: system-ui, sans-serif;
 }
 
+/* NAV */
 .navigation {
   width: 10%;
   min-width: 70px;
-  height: auto;
   background: #d2d2d27d;
-  position: relative;
 }
 
 .navigationContent {
   position: fixed;
   top: 0;
-  left: -100%;   
+  left: -100%;
   width: 30%;
   min-width: 280px;
   height: 100vh;
-
   background: linear-gradient(180deg, #0b0d12, #06070a);
   color: #fff;
   padding: 40px 30px;
-
   transition: left 0.35s ease;
   z-index: 1000;
-
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
-/* ON CLICK SHOW */
 .show {
   left: 0;
 }
@@ -43,7 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 
 .navHeader h2 {
@@ -63,40 +58,43 @@
 
 .navMenu li {
   font-size: 22px;
-  margin-bottom: 35px;
+  margin-bottom: 32px;
   cursor: pointer;
-  color: #d6d6d6;
+  color: #cfcfcf;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .navMenu li:hover {
   color: #fff;
+  transform: translateX(4px);
 }
 
-/* CONTENT AREA */
+/* CONTENT */
 .content {
   flex: 1;
-  padding: 0px 24px 24px 24px;
-  background: #f6f7f9;
-  min-height: 100vh;
+  padding: 0 24px 24px;
+}
+
+.content h2 {
+  font-size: 2rem;
+  margin: 10px 0 20px;
 }
 
 .contentHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  padding-bottom: 20px !important;
+  padding: 10px 10px 20px;
+  font-size: 1.4rem;
 }
 
+/* GRID */
 .carGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px;
-  width: 100%;
 }
 
+/* CARD */
 .carCard {
-  background: #ffffff;
+  background: #fff;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -116,50 +114,155 @@
   object-fit: cover;
 }
 
+.noImage {
+  height: 180px;
+  background: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+
 .carCard h3 {
   font-size: 1.05rem;
-  font-weight: 600;
   margin: 12px 14px 4px;
-  color: #111;
 }
 
 .carCard p {
   font-size: 0.9rem;
-  margin: 0 14px 12px;
+  margin: 0 14px 8px;
   color: #555;
 }
 
-.carCardButtons{
-  margin-top: auto;
-  display: flex;
-  justify-content: center;
+.carTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 12px 14px 4px;
+  color: #111827;
 }
 
-.carCardButtons button {
-  width: calc(100% - 24px);
-  margin: auto 12px 14px;
-  padding: 10px 0;
-  border: none;
-  border-radius: 10px;
-  background: #111;
-  color: #fff;
-  cursor: pointer;
+.carMeta {
   font-size: 0.9rem;
-  transition: background 0.25s ease, transform 0.15s ease;
+  color: #6b7280;
+  margin: 0 14px 8px;
 }
 
-.carCard button:hover {
-  background: #000;
-  transform: scale(1.02);
+.price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 8px 14px 6px;
 }
 
+.statusRow {
+  font-size: 0.95rem;
+  margin: 0 14px 8px;
+}
+
+.statusActive {
+  font-weight: 700;
+  color: #0f9d58; 
+}
+
+.statusPending {
+  font-weight: 700;
+  color: #f9a825;
+}
+
+.statusRejected {
+  font-weight: 700;
+  color: #d32f2f; 
+}
+
+.status {
+  margin: 0 14px 12px;
+  padding: 4px 10px;
+  width: fit-content;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.ACTIVE {
+  background: #e6f7ee;
+  color: #1f9254;
+}
+
+.PENDING {
+  background: #fff4e5;
+  color: #b26a00;
+}
+
+.REJECTED {
+  background: #fdeaea;
+  color: #c62828;
+}
+
+.carCardButtons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  padding: 0 14px 14px;
+}
+
+.updateBtn,
+.deleteBtn {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* ACTIVE COLORS */
+.updateBtn {
+  background-color: #3a86ff;
+  color: #fff;
+}
+
+.deleteBtn {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.updateBtn:not(:disabled):hover {
+  background-color: #265fbb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+}
+
+.deleteBtn:not(:disabled):hover {
+  background-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+}
+
+.updateBtn:not(:disabled):active,
+.deleteBtn:not(:disabled):active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.15);
+}
+
+.updateBtn:disabled,
+.deleteBtn:disabled {
+  background-color: #cbd5e1;  
+  color: #64748b;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* LOADING */
 .loading,
 .error {
   padding: 40px;
   font-size: 1rem;
   color: #444;
 }
-
 
 /* Big screens (≥ 1025px) */
 @media (min-width: 1025px) {
