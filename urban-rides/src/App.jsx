@@ -9,6 +9,7 @@ import UPI from './pages/DummyUPI.jsx'
 import BookingBill from './pages/Bill.jsx'
 import AddCar from './pages/AddCar.jsx'
 import UpdateCar from './pages/UpdateCar.jsx'
+import ProfilePage from './pages/ProfilePage.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/Owner/Profile" element={<ProfilePage />} />
 
         {/* Renter Routes */}
         <Route path="/Renter" element={<Renter />} />

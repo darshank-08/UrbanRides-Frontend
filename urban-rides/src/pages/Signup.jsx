@@ -15,7 +15,8 @@ const Signup = () => {
     username: "",
     mobile: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    gender: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -42,6 +43,7 @@ const Signup = () => {
     if (
       !data.fullName ||
       !data.username ||
+      !data.gender ||
       !data.mobile ||
       !data.password ||
       !data.confirmPassword
@@ -82,7 +84,8 @@ const Signup = () => {
         fullName: data.fullName.trim(),
         userName: data.username.trim(),
         phoneNumber: Number(data.mobile.trim()),
-        password: data.password
+        password: data.password,
+        gender: data.gender
       };
 
       if(userType === "Renter"){
@@ -99,7 +102,8 @@ const Signup = () => {
         adminFullName: data.fullName.trim(),
         adminName: data.username.trim(),
         adminNumber: Number(data.mobile.trim()),
-        adminPass: data.password
+        adminPass: data.password,
+        adminGender: data.gender
       };
 
       testAPI = adminAPI.testApi;
@@ -189,6 +193,17 @@ const Signup = () => {
           <input type="text" name="fullName" placeholder="Full Name" className={styles.input} value={data.fullName} onChange={handleChange}/>
 
           <input type="text" name="username" placeholder="Username" className={styles.input} value={data.username} onChange={handleChange}/>
+
+          <div className={styles.radioGroup}>
+            <label>
+              <input type="radio" name="gender" value="Male" onChange={handleChange} checked={data.gender === "Male"} />
+              Male
+            </label>
+            <label>
+              <input type="radio" name="gender" value="Female" onChange={handleChange} checked={data.gender === "Female"} />
+              Female
+            </label>
+          </div>
 
           <input type="tel" name="mobile" placeholder="Mobile Number" className={styles.input} value={data.mobile} onChange={handleChange} maxLength="10"/>
 
