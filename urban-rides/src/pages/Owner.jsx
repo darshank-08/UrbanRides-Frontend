@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./Owner.module.css";
 import Hamburger from "../components/Hamburger";
 import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 
 const Owner = () => {
   const [open, setOpen] = useState(false);
@@ -93,6 +95,18 @@ const Owner = () => {
     }
   };
 
+  const logoutHandler = () => {
+    if (!window.confirm("Are you sure you want to logout?")) return;
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
+
+  const user = localStorage.getItem("user");
+
+  const profileHandler = () => {
+    navigate("/Owner/Profile");
+  }
+
   if (loading) return <p className={styles.loading}>Loading cars...</p>;
 
   return (
@@ -106,6 +120,8 @@ const Owner = () => {
             <h2>OWNER</h2>
             <span onClick={() => setOpen(false)}>✕</span>
           </div>
+
+          <hr style={{maxWidth:"80%"}}/>
 
           <ul className={styles.navMenu}>
             <li onClick={() => { setView("ALL"); setOpen(false); }}>
@@ -123,6 +139,29 @@ const Owner = () => {
             <li onClick={() => { setView("REJECTED"); setOpen(false); }}>
               Rejected Cars
             </li>
+
+            <hr style={{maxWidth:"80%"}}/>
+
+          <div className={styles.navFooter}>
+            <ul className={styles.navFooterMenu}> 
+              <li className={styles.navFooterprofile}
+              onClick={profileHandler}>
+                <FaUserCircle />
+
+                <div className={styles.profilePreview}>
+                  <div className={styles.profilePreviewName}>{user}</div>
+                  <div className={styles.profilePreviewEdit}>Edit profile</div>
+                </div>
+              </li>
+
+              <li className={styles.navFooterlogout} onClick={logoutHandler}>
+                <FiLogOut />
+                <span>logout</span>
+              </li>
+
+            </ul>
+          </div>
+
           </ul>
         </div>
       </div>

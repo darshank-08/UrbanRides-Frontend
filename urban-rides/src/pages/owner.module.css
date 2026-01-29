@@ -38,11 +38,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .navHeader h2 {
   font-size: 32px;
+}
+
+.navHeader span{
+  cursor: pointer;
 }
 
 .close {
@@ -54,6 +58,7 @@
 .navMenu {
   list-style: none;
   padding: 0;
+  margin: 30px 0px;
 }
 
 .navMenu li {
@@ -67,6 +72,122 @@
 .navMenu li:hover {
   color: #fff;
   transform: translateX(4px);
+}
+
+.sidebar, 
+.navbar,
+.ownerSidebar {   
+  position: relative;
+  overflow: visible; 
+}
+
+.navFooterMenu {
+  list-style: none;
+  padding: 19px 15px;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.navFooterMenu li {
+  position: relative;
+  font-size: 36px; 
+  margin-bottom: 22px;
+  cursor: pointer;
+  color: #cfcfcf;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navFooterMenu li span {
+  font-size: 22px;
+  color: #fffffffc;
+  text-transform: capitalize;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* logout */
+.navFooterlogout {
+  position: relative;
+  top: 10px;
+}
+
+.navFooterlogout span {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+}
+
+.navFooterlogout:hover span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* profile */
+.navFooterprofile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.navFooterprofile:hover .profilePreview,
+.profilePreview:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
+}
+
+.navFooterprofile {
+  position: relative;
+}
+
+.navFooterprofile::after .profilePreview,
+.profilePreview:after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
+}
+
+/* profile preview card */
+.profilePreview {
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  background: #ffffff;
+  color: #111;
+  padding: 14px 18px;
+  border-radius: 14px;
+  min-width: 100px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999; 
+}
+
+.profilePreviewName {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.profilePreviewEdit {
+  font-size: 12px;
+  color: #3a86ff;
+  cursor: pointer;
 }
 
 /* CONTENT */
