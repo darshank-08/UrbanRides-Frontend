@@ -180,7 +180,7 @@ const Login = () => {
 
         </form>
 
-        {role != "SuperAdmin" &&
+        {role !== "SuperAdmin" && role !== "Admin" &&
           <div className={styles.footer}>
             <p>
               New to Urban Rides?{" "}

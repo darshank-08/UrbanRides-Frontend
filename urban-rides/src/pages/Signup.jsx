@@ -1,14 +1,11 @@
 import styles from "./Signup.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SignupNavbar from "../components/SignupNavbar.jsx"
 
 const Signup = () => {
   const navigate = useNavigate();
 
-   const [role, setRole] = useState("User");
-   const [userType, setUserType] = useState("Renter");
-
+  const [userType, setUserType] = useState("Renter");
 
   const [data, setData] = useState({
     fullName: "",
@@ -21,20 +18,17 @@ const Signup = () => {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-    console.log(errorMessage)
 
-  
   const handleChange = (e) => {
-  const { name, value } = e.target;
+    const { name, value } = e.target;
 
-  if (name === "mobile" && !/^\d*$/.test(value)) return;
+    if (name === "mobile" && !/^\d*$/.test(value)) return;
 
-  setData({
-    ...data,
+    setData({
+      ...data,
       [name]: value
     });
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +46,6 @@ const Signup = () => {
       return;
     }
 
-
     if (!/^[0-9]{10}$/.test(data.mobile)) {
       setErrorMessage("Mobile number must be 10 digits");
       return;
@@ -63,87 +56,42 @@ const Signup = () => {
       return;
     }
 
-    setLoading(true); 
+    setLoading(true);
 
-    const userAPI ={
-       testApi : "http://localhost:8080/sign-in/",
-       ProdApi : "https://urban-rides-production.up.railway.app/api/auth/register"
-    }
+    const userAPI = {
+      testApi: "http://localhost:8080/sign-in/",
+      prodApi: "https://urban-rides-production.up.railway.app/api/auth/register/"
+    };
 
-    const adminAPI ={
-       testApi : "http://localhost:8080/sign-in/admin",
-       ProdApi : "https://urban-rides-production.up.railway.app/api/auth/register"
-    }
+    const payload = {
+      fullName: data.fullName.trim(),
+      userName: data.username.trim(),
+      phoneNumber: Number(data.mobile.trim()),
+      password: data.password,
+      gender: data.gender
+    };
 
-    let payload;
-    let testAPI;
-    let prodAPI;
-
-    if (role === "User") {
-      payload = {
-        fullName: data.fullName.trim(),
-        userName: data.username.trim(),
-        phoneNumber: Number(data.mobile.trim()),
-        password: data.password,
-        gender: data.gender
-      };
-
-      if(userType === "Renter"){
-        testAPI = userAPI.testApi + "renter";
-        prodAPI = userAPI.ProdApi + "renter";
-      }else if(userType === "Owner"){
-        testAPI = userAPI.testApi + "owner";
-        prodAPI = userAPI.ProdApi + "owner";
-      }
-
-      
-    } else {
-      payload = {
-        adminFullName: data.fullName.trim(),
-        adminName: data.username.trim(),
-        adminNumber: Number(data.mobile.trim()),
-        adminPass: data.password,
-        adminGender: data.gender
-      };
-
-      testAPI = adminAPI.testApi;
-      prodAPI = adminAPI.ProdApi;
-    }
-
+    const api =
+      userType === "Renter"
+        ? userAPI.testApi + "renter"
+        : userAPI.testApi + "owner";
 
     try {
-
-      const res = await fetch(testAPI, {
+      const res = await fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
-      let result = {};
-      try {
-        result = await res.json(); 
-      } catch (err) {
-        console.error("JSON parse error", err);
-        result = {};
-      }
+      const result = await res.json();
 
       if (!res.ok) {
-        if (result.code === "USERNAME_TAKEN") {
-          setErrorMessage("Username already taken! Choose another.");
-        } else {
-          setErrorMessage(result.message || "Something went wrong");
-        }
+        setErrorMessage(result.message || "Something went wrong");
         return;
       }
 
-      if(role === "User"){
-        navigate("/login");
-        alert("Sign up successfull. Log in to continue")
-      }else{
-        alert("Please wait for approval from Super-Admin")
-      }
-
-
+      alert("Signup successful. Please login to continue.");
+      navigate("/login");
     } catch {
       setErrorMessage("Something went wrong");
     } finally {
@@ -154,64 +102,108 @@ const Signup = () => {
   return (
     <div className={styles.signupWrapper}>
 
-      <SignupNavbar onSelect={setRole} />
       <div className={styles.signupCard}>
-
-        <h2 className={styles.title}>Create Account</h2>
+        <h2 className={styles.title}>Create User Account</h2>
         <p className={styles.subtitle}>
-          Join Urban Rides and start your journey
+          Sign up as a Renter or Owner to use Urban Rides
         </p>
 
-        {errorMessage && (
-          <p className={styles.error}>{errorMessage}</p>
-        )}
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
 
         <form className={styles.form} onSubmit={handleSubmit}>
-
-          {/* BASIC INFO */}
-          <p className={styles.input}><span style={{color: "#7e7c7c"}}>Selected Role : </span>{role}</p>
-
-          {role === "User" && (
-            <div className={styles.radioGroup}>
-              <label>
-                <input type="radio" name="userType" value="Renter" onChange={(e) => setUserType(e.target.value)}/>
-                Renter
-              </label>
-
-              <label>
-                <input type="radio" name="userType" value="Owner" onChange={(e) => setUserType(e.target.value)}/>
-                Owner
-              </label>
-            </div>
-          )}
-        
-
-          {role === "Admin" && (
-            <p className={styles.input}>Note : <span style={{color: "#7e7c7c"}}>You have to wait for approval from Super-Admin</span></p>
-          )}
-
-          <input type="text" name="fullName" placeholder="Full Name" className={styles.input} value={data.fullName} onChange={handleChange}/>
-
-          <input type="text" name="username" placeholder="Username" className={styles.input} value={data.username} onChange={handleChange}/>
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            className={styles.input}
+            value={data.fullName}
+            onChange={handleChange}
+          />
 
           <div className={styles.radioGroup}>
             <label>
-              <input type="radio" name="gender" value="Male" onChange={handleChange} checked={data.gender === "Male"} />
-              Male
+              <input
+                type="radio"
+                name="userType"
+                value="Renter"
+                checked={userType === "Renter"}
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              Renter
             </label>
+
             <label>
-              <input type="radio" name="gender" value="Female" onChange={handleChange} checked={data.gender === "Female"} />
-              Female
+              <input
+                type="radio"
+                name="userType"
+                value="Owner"
+                checked={userType === "Owner"}
+                onChange={(e) => setUserType(e.target.value)}
+              />
+              Owner
             </label>
           </div>
 
-          <input type="tel" name="mobile" placeholder="Mobile Number" className={styles.input} value={data.mobile} onChange={handleChange} maxLength="10"/>
+          <input
+            type="tel"
+            name="mobile"
+            placeholder="Mobile Number"
+            className={styles.input}
+            value={data.mobile}
+            onChange={handleChange}
+            maxLength="10"
+          />
 
-          {/* PASSWORD GROUP */}
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            className={styles.input}
+            value={data.username}
+            onChange={handleChange}
+          />
+
           <div className={styles.passwordGroup}>
-            <input type="password" name="password" placeholder="Password" className={styles.input} value={data.password} onChange={handleChange}/>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className={styles.input}
+              value={data.password}
+              onChange={handleChange}
+            />
 
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" className={styles.input} value={data.confirmPassword} onChange={handleChange}/>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              className={styles.input}
+              value={data.confirmPassword}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={styles.radioGroup}>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="Male"
+                checked={data.gender === "Male"}
+                onChange={handleChange}
+              />
+              Male
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="gender"
+                value="Female"
+                checked={data.gender === "Female"}
+                onChange={handleChange}
+              />
+              Female
+            </label>
           </div>
 
           <button
@@ -222,13 +214,11 @@ const Signup = () => {
           >
             {loading ? "Creating Account..." : "Sign Up"}
           </button>
-
         </form>
 
         <div className={styles.footer}>
           Already have an account? <a href="/login">Login</a>
         </div>
-
       </div>
     </div>
   );

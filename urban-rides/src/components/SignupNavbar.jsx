@@ -53,7 +53,7 @@ const SignupNavbar = ({ onSelect }) => {
         }`}
         onClick={() => handleSelect("Admin")}
       >
-        Admin
+        Employee
       </div>
 
       {showSuperAdmin && (
@@ -63,7 +63,7 @@ const SignupNavbar = ({ onSelect }) => {
           } ${styles.superAdmin}`}
           onClick={() => handleSelect("SuperAdmin")}
         >
-          SUPER ADMIN
+          ADMIN
         </div>
       )}
     </nav>
