@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import styles from "../components/SignupNavbar.module.css";
 
 const SignupNavbar = ({ onSelect }) => {
-  const [selected, setSelected] = useState('User');
+  const [selected, setSelected] = useState("User");
   const [showSuperAdmin, setShowSuperAdmin] = useState(false);
-  const SUPER_ADMIN_SHORTCUT = {
+
+  const ADMIN_SHORTCUT = {
     ctrl: true,
     shift: false,
     key: "s"
   };
-  
+
   const handleSelect = (value) => {
     setSelected(value);
-    if(onSelect){
+    if (onSelect) {
       onSelect(value);
     }
   };
@@ -20,19 +21,19 @@ const SignupNavbar = ({ onSelect }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (
-        event.ctrlKey === SUPER_ADMIN_SHORTCUT.ctrl &&
-        event.shiftKey === SUPER_ADMIN_SHORTCUT.shift &&
-        event.key.toLowerCase() === SUPER_ADMIN_SHORTCUT.key
+        event.ctrlKey === ADMIN_SHORTCUT.ctrl &&
+        event.shiftKey === ADMIN_SHORTCUT.shift &&
+        event.key.toLowerCase() === ADMIN_SHORTCUT.key
       ) {
         event.preventDefault();
-        setShowSuperAdmin(prev => !prev);
+        setShowSuperAdmin((prev) => !prev);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -49,9 +50,9 @@ const SignupNavbar = ({ onSelect }) => {
 
       <div
         className={`${styles.button} ${
-          selected === "Admin" ? styles.active : ""
+          selected === "Employee" ? styles.active : ""
         }`}
-        onClick={() => handleSelect("Admin")}
+        onClick={() => handleSelect("Employee")}
       >
         Employee
       </div>
@@ -59,15 +60,15 @@ const SignupNavbar = ({ onSelect }) => {
       {showSuperAdmin && (
         <div
           className={`${styles.button} ${
-            selected === "SuperAdmin" ? styles.active : ""
+            selected === "Admin" ? styles.active : ""
           } ${styles.superAdmin}`}
-          onClick={() => handleSelect("SuperAdmin")}
+          onClick={() => handleSelect("Admin")}
         >
           ADMIN
         </div>
       )}
     </nav>
   );
-}
+};
 
 export default SignupNavbar;
