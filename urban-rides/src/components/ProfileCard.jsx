@@ -6,22 +6,49 @@ const ProfileCard = () => {
   const [loading, setLoading] = useState(true);
 
   const API = {
-    test: "http://localhost:8080/Owner/user",
-    prod: "https://urban-rides-production.up.railway.app/Owner/user",
+    OWNER: {
+      test: "http://localhost:8080/Owner/user",
+      prod: "https://urban-rides-production.up.railway.app/Owner/user",
+    },
+    RENTER: {
+      test: "http://localhost:8080/Renter/user",
+      prod: "https://urban-rides-production.up.railway.app/Renter/user",
+    },
+    EMPLOYEE: {
+      test: "http://localhost:8080/Employee/user",
+      prod: "https://urban-rides-production.up.railway.app/Employee/user",
+    },
+    ADMIN: {
+      test: "http://localhost:8080/Admin/user",
+      prod: "https://urban-rides-production.up.railway.app/Admin/user",
+    },
   };
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
         const token = localStorage.getItem("token");
-        // Ensure you handle the case where token might be null if needed
-        const response = await fetch(API.test, {
+        const roles = JSON.parse(localStorage.getItem("roles")) || [];
+
+        if (!token || roles.length === 0) {
+          throw new Error("No auth data");
+        }
+
+        // ROLE_OWNER → OWNER
+        const roleKey = roles[0].replace("ROLE_", "");
+
+        const apiUrl = API[roleKey]?.test;
+        if (!apiUrl) {
+          throw new Error("Invalid role API");
+        }
+
+        const response = await fetch(apiUrl, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) throw new Error();
+        if (!response.ok) throw new Error("Fetch failed");
 
         const data = await response.json();
         setUserInfo(data);
@@ -38,11 +65,9 @@ const ProfileCard = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className={styles.container}>
-      {/* MAIN CARD WRAPPER */}
       <div className={styles.profileWrapper}>
         
-        {/* TOP SECTION: Header & Buttons */}
+        {/* TOP SECTION */}
         <div className={styles.topSection}>
           <div className={styles.profileHeader}>
             <h2 className={styles.profileName}>
@@ -73,7 +98,7 @@ const ProfileCard = () => {
 
         <hr className={styles.divider} />
 
-        {/* BOTTOM SECTION: Info Grid */}
+        {/* BOTTOM SECTION */}
         <div className={styles.bottomSection}>
           <div className={styles.infoItem}>
             <span>Gender</span>
@@ -101,7 +126,6 @@ const ProfileCard = () => {
         </div>
 
       </div>
-    </div>
   );
 };
 

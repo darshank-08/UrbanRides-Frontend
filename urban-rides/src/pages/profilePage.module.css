@@ -1,17 +1,18 @@
-.profilePage {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-radius: 30%;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+   background: #fcfcfcd7;
 }
 
-.profileTitle{
-    position: relative;
-    right: 200px;
-    font-size: 24px;
-    font-weight: 600;
+.profilePage {
+  width: 100vw;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 32px 16px;
 }
