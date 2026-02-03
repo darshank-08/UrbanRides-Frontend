@@ -15,7 +15,7 @@
   background: #f9fafb;
 
   display: grid;
-  grid-template-rows: 75% 25%;
+  grid-template-rows: 45% 55%;
   gap: 18px;
   padding: 20px;
 }
@@ -86,7 +86,8 @@
   display: flex;
   gap: 14px;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 10px;
 }
 
 .bookBtn {

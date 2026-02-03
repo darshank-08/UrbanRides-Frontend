@@ -104,7 +104,7 @@ const Owner = () => {
   const user = localStorage.getItem("user");
 
   const profileHandler = () => {
-    navigate("/Owner/Profile");
+    navigate("/Profile");
   }
 
   if (loading) return <p className={styles.loading}>Loading cars...</p>;

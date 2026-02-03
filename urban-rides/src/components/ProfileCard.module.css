@@ -1,5 +1,4 @@
 
-
 .profileWrapper {
   width: 460px;
   background: transparent;
@@ -50,18 +49,76 @@
   border-radius: 50%;
 }
 
-
 .topSection {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 72px 32px 0 32px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 32px 32px 0 32px;
 }
 
 .profileHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  justify-self: flex-end;
+}
+
+.profilePhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoPicker {
+  height: 95px;
+  width: 95px;
+  border-radius: 50%;
+  border: 2px dashed rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  top: -3px;
+  transition: all 0.3s ease;
+}
+
+.photoPicker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photoPicker::after {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 35%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photoPicker:hover::after {
+  opacity: 1;
+}
+.photoPicker input {
+  display: none;
+}
+
+.profileContent{
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: flex-start;
+  position: relative;
+  left: -5px;
 }
 
 .profileName {
@@ -75,11 +132,10 @@
   color: #64748b;
 }
 
-
 .roleRow {
   display: flex;
   gap: 8px;
-  margin-top: 10px;
+  margin: 10px 0px;
 }
 
 .roleBadge {
@@ -91,11 +147,16 @@
   font-weight: 600;
 }
 
+.roleRow p{
+  font-size: 1rem;
+}
 
 .profileActions {
   display: flex;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 15px;
+  position: relative;
+  left: -5px;
+  margin-top: 10px;
 }
 
 .btn {
@@ -110,7 +171,7 @@
 .secondary {
   background: #6366f1;
   color: #ffffff;
-  border: none;
+  border: 1px solid rgb(205, 215, 184);
 }
 
 .secondary:hover {
@@ -135,8 +196,8 @@
 }
 
 .bottomSection {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   padding: 28px 32px 32px;
 }
