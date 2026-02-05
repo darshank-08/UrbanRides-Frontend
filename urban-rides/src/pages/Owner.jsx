@@ -103,9 +103,9 @@ const Owner = () => {
 
   const user = localStorage.getItem("user");
 
-  const profileHandler = () => {
+    const profileHandler = () => {
     navigate("/Profile");
-  }
+  };
 
   if (loading) return <p className={styles.loading}>Loading cars...</p>;
 
@@ -150,7 +150,7 @@ const Owner = () => {
 
                 <div className={styles.profilePreview}>
                   <div className={styles.profilePreviewName}>{user}</div>
-                  <div className={styles.profilePreviewEdit}>Edit profile</div>
+                  <div className={styles.profilePreviewEdit} onClick={profileHandler}>Edit profile</div>
                 </div>
               </li>
 
