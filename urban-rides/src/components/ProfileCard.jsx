@@ -260,9 +260,8 @@ const ProfileCard = () => {
 
       alert("Account deleted successfully");
 
-      // cleanup yahan
-      // localStorage.clear();
-      // window.location.href = "/login";
+      localStorage.clear();
+      window.location.href = "/login";
     } catch (err) {
       console.error("Delete error:", err);
       alert("Something went wrong while deleting account");

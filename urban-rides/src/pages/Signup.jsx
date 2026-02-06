@@ -59,8 +59,8 @@ const Signup = () => {
     setLoading(true);
 
     const userAPI = {
-      testApi: "http://localhost:8080/sign-in/",
-      prodApi: "https://urban-rides-production.up.railway.app/api/auth/register/"
+      testApi: "http://localhost:8080/sign-up/",
+      prodApi: "https://urban-rides-production.up.railway.app/sign-up/"
     };
 
     const payload = {

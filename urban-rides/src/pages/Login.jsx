@@ -30,8 +30,8 @@ const buildPayload = (role, data) => {
 
   if (role === "Employee") {
     return {
-      empName: data.username,
-      empPass: data.password
+      username: data.username,
+      password: data.password
     };
   }
 
@@ -119,6 +119,7 @@ const Login = () => {
     }
 
     setLoading(true);
+    console.log(payload)
 
     try {
       const res = await fetch(api, {
