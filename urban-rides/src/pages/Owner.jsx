@@ -103,7 +103,7 @@ const Owner = () => {
 
   const user = localStorage.getItem("user");
 
-    const profileHandler = () => {
+  const profileHandler = () => {
     navigate("/Profile");
   };
 
