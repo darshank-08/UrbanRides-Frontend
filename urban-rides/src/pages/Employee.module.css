@@ -237,11 +237,6 @@
   flex-direction: column;
 }
 
-.carCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
-}
-
 .carCard img {
   width: 100%;
   height: 180px;
@@ -250,13 +245,16 @@
 
 .carBody{
   padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .carCompany{
   font-size: 1.35rem;
+  margin: 5px 10px 0px 10px;
 }
 
 .owner{
@@ -266,6 +264,32 @@
 
 .owner span{
   color: #565656;
+}
+
+.viewbtn{
+  border: 0.50px solid rgba(0, 0, 0, 0.621);
+  padding: 5px 10px;
+}
+
+.viewbtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+}
+
+.pendingbtn{
+  background-color: rgb(229, 229, 22);
+  border-radius: 25px;
+  padding: 5px 15px;
+  text-align: center;
+  height: fit-content;
+  max-width: fit-content;
+  justify-self: center;
+  font-size: 0.90rem;
+  font-weight: 600;
+}
+
+.pendingbtn:focus {
+  outline: none;
 }
 
 .noCars {

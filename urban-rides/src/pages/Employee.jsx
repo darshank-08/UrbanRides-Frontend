@@ -38,6 +38,7 @@ const Employee = () => {
         });
         const data = await res.json();
         setPendingCars(Array.isArray(data) ? data : (data?.pendingCars ?? []));
+        console.log(data);
       } catch (e) {
         console.error(e);
       } finally {
@@ -85,6 +86,10 @@ const Employee = () => {
     const time = dt.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", hour12: true });
     return `${date} at ${time}`;
   };
+
+  const details = () => {
+    navigate("/Car-Varification")
+  }
 
   return (
     <div className={styles.main}>
@@ -164,10 +169,16 @@ const Employee = () => {
                       <div className={styles.noImage}>No Image</div>
                     )}
 
+                    <h3 className={styles.carCompany}>{car.company} {car.model}</h3>
+
                     <div className={styles.carBody}>
-                      <h3 className={styles.carCompany}>{car.company} {car.model}</h3>
-                      <p className={styles.owner}><span>Owner: </span>{car.ownerName}</p>
                       <p className={styles.owner}><span>Created at: </span>{formatCreatedAt(car.createdAt)}</p>
+                      {car.status === "PENDING_APPROVAL" ?
+                        <p className={styles.pendingbtn}>Pending</p>:
+                        <button className={styles.pendingbtn}>N/A</button>
+                       }
+                      <p className={styles.owner}><span>Owner: </span>{car.ownerName}</p>
+                      <button onClick={details} className={styles.viewbtn}>View Details</button>
                     </div>
                   </div>
                 ))}
