@@ -11,6 +11,7 @@ import AddCar from './pages/AddCar.jsx'
 import UpdateCar from './pages/UpdateCar.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import Employee from './pages/Employee.jsx'
+import CarVarifecation from './pages/CarVarifecation.jsx'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
 
         {/* Employee Routes */}
         <Route path="Employee" element={<Employee />}/>
+        <Route path="/Car-Varification/:id" element={<CarVarifecation />} />
 
       </Routes>
     </Router>

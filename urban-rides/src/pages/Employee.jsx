@@ -87,9 +87,6 @@ const Employee = () => {
     return `${date} at ${time}`;
   };
 
-  const details = () => {
-    navigate("/Car-Varification")
-  }
 
   return (
     <div className={styles.main}>
@@ -178,7 +175,9 @@ const Employee = () => {
                         <button className={styles.pendingbtn}>N/A</button>
                        }
                       <p className={styles.owner}><span>Owner: </span>{car.ownerName}</p>
-                      <button onClick={details} className={styles.viewbtn}>View Details</button>
+                      <button onClick={() => navigate(`/Car-Varification/${car.id}`)} className={styles.viewbtn} >
+                        View Details
+                      </button>
                     </div>
                   </div>
                 ))}
