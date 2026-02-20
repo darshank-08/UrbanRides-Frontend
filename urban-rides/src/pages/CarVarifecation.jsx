@@ -328,9 +328,13 @@ const CarVarifecation = () => {
       {/* Review Decision */}
       <div className={styles.reviewCard}>
         <h2 className={styles.reviewTitle}>Review Decision</h2>
-        <p className={styles.reviewSubtitle}>
-          *Review all details carefully before making a decision
-        </p>
+
+        {carDetails.status === "PENDING_APPROVAL" && 
+          <p className={styles.reviewSubtitle}>
+            *Review all details carefully before making a decision
+          </p>       
+        }
+
 
         {carDetails.status !== "PENDING_APPROVAL" ? (
           <p className={styles.reviewState}>
