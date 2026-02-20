@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./CarVarifecation.module.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { MdOutlinePhone } from "react-icons/md";
+import { Navigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CarVarifecation = () => {
   const { id } = useParams();
@@ -8,9 +11,19 @@ const CarVarifecation = () => {
 
   const [loadingCarDetails, setLoadingCarDetails] = useState(true);
   const [carDetails, setCarDetails] = useState(null);
+
+  const [loadingOwnerInfo, setLoadingOwnerInfo] = useState(true);
+  const [ownerInfo, setOwnerInfo] = useState(null);
+
   const [bookedDates, setBookedDates] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const [loadingApproval, setLoadingApproval] = useState(false);
+  const [loadingReject, setLoadingReject] = useState(false);
+
+  const emp = localStorage.getItem("user");
+
+  // Fetch car details
   useEffect(() => {
     if (!id) return;
 
@@ -19,12 +32,9 @@ const CarVarifecation = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(
-          `http://localhost:8080/Employee/car/${id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await fetch(`http://localhost:8080/Employee/car/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         if (!res.ok) {
           console.error("Failed to fetch car details", res.status);
@@ -33,10 +43,10 @@ const CarVarifecation = () => {
         }
 
         const data = await res.json();
-        console.log("raw data:", data);
-
         setCarDetails(data.carDetails);
+        console.log("Fetched car details:", data.carDetails);
         setBookedDates(data.bookedDates ?? []);
+        setCurrentIndex(0);
       } catch (e) {
         console.error(e);
         setCarDetails(null);
@@ -47,6 +57,81 @@ const CarVarifecation = () => {
 
     fetchCarDetails();
   }, [id]);
+
+  const owner = useMemo(() => carDetails?.ownerName ?? "", [carDetails]);
+  console.log("Owner name from car details:", owner);
+
+  useEffect(() => {
+    if (!owner) return;
+
+    const fetchOwnerInfo = async () => {
+      setLoadingOwnerInfo(true);
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(`http://localhost:8080/Employee/owner/${owner}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!res.ok) {
+          console.error("Failed to fetch owner info", res.status);
+          setOwnerInfo(null);
+          return;
+        }
+
+        const data = await res.json();
+        setOwnerInfo(data);
+        console.log("Fetched owner info:", data);
+      } catch (e) {
+        console.error(e);
+        setOwnerInfo(null);
+      } finally {
+        setLoadingOwnerInfo(false);
+      }
+    };
+
+    fetchOwnerInfo();
+  }, [owner]);
+
+  // Approving Car
+  const handleApprove = async () => {
+    if (!carDetails) return;
+    setLoadingApproval(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:8080/Employee/car-approval/${carDetails.id}/${emp}`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingApproval(false);
+    }
+
+    alert(`Car has been approved by ${emp}.`);
+    navigate("/Employee");
+  };
+
+  // Rejecting Car
+  const handleReject = async () => {
+    if (!carDetails) return;
+    setLoadingReject(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:8080/Employee/car-reject/${carDetails.id}/${emp}`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingReject(false);
+    }
+
+    alert(`Car has been rejected by ${emp}.`);
+    navigate("/Employee")
+  };
 
   const formatCreatedAt = (iso) => {
     if (!iso) return "-";
@@ -63,7 +148,6 @@ const CarVarifecation = () => {
     });
     return `${date} • ${time}`;
   };
-
 
   const prevImage = () => {
     if (!carDetails?.images?.length) return;
@@ -84,11 +168,7 @@ const CarVarifecation = () => {
   }
 
   if (!carDetails) {
-    return (
-      <div className={styles.error}>
-        Car not found or error fetching data.
-      </div>
-    );
+    return <div className={styles.error}>Car not found or error fetching data.</div>;
   }
 
   const isPending = carDetails.status === "PENDING_APPROVAL";
@@ -106,10 +186,7 @@ const CarVarifecation = () => {
         <div className={styles.owner}>
           <ul className={styles.metaList}>
             <li>
-              Owner:{" "}
-              <span className={styles.metaStrong}>
-                {carDetails.ownerName}
-              </span>
+              Owner: <span className={styles.metaStrong}>{carDetails.ownerName}</span>
             </li>
             <li>Submitted: {formatCreatedAt(carDetails.createdAt)}</li>
           </ul>
@@ -126,7 +203,7 @@ const CarVarifecation = () => {
         </div>
       </nav>
 
-      {/* IMG & Actions */}
+      {/* IMG */}
       <div className={styles.imgAction}>
         <div className={styles.img}>
           {carDetails.images && carDetails.images.length > 0 ? (
@@ -138,27 +215,24 @@ const CarVarifecation = () => {
 
               {carDetails.images.length > 1 && (
                 <>
-                  <button className={styles.prevBtn} onClick={prevImage}>
+                  <button className={styles.prevBtn} onClick={prevImage} type="button">
                     <span>‹</span>
                   </button>
-                  <button className={styles.nextBtn} onClick={nextImage}>
+                  <button className={styles.nextBtn} onClick={nextImage} type="button">
                     <span>›</span>
                   </button>
                 </>
               )}
             </>
           ) : (
-            <div className={styles.noImage}>
-              No image available
-            </div>
+            <div className={styles.noImage}>No image available</div>
           )}
         </div>
       </div>
 
-      {/* car details */}
+      {/* Vehicle Info */}
       <div className={styles.vehicleInfoCard}>
         <h2 className={styles.vehicleInfoTitle}>Vehicle Information</h2>
-
         <hr className={styles.vehicleInfoDivider} />
 
         <div className={styles.vehicleInfoGrid}>
@@ -194,17 +268,61 @@ const CarVarifecation = () => {
 
           <div className={styles.vehicleInfoItem}>
             <span className={styles.vehicleInfoLabel}>Condition</span>
-            <span className={styles.vehicleInfoValue}>
-              {carDetails.condition ?? "-"}
-            </span>
+            <span className={styles.vehicleInfoValue}>{carDetails.condition ?? "-"}</span>
           </div>
         </div>
       </div>
 
-      {/* user info */}
-      <div className={styles.vehicleInfoCard}>
-        <span className={styles.ownerLabel}>* Visit for more information</span><br />
-        <span>{carDetails.ownerName}</span><br />
+      {/* Owner Info card (you named it EMP card but it is Owner info) */}
+      <div className={styles.ownerCard}>
+        <div className={styles.ownerCardHeader}>
+          <h3>Owner Information</h3>
+        </div>
+
+        <div className={styles.ownerCardBody}>
+          {loadingOwnerInfo ? (
+            <p className={styles.empState}>Loading owner info...</p>
+          ) : !ownerInfo ? (
+            <p className={styles.empState}>Owner info not available</p>
+          ) : (
+            <>
+              <div className={styles.ownerTop}>
+                <div className={styles.ownerAvatar}>
+                  <CgProfile size={24} />
+                </div>
+
+                <div>
+                  <div className={styles.vehicleInfoLabel}>Owner Name</div>
+                  <div className={styles.vehicleInfoValue}>
+                    <span className={styles.ownerNameSpan}>{ownerInfo.fullName ?? "-"}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.ownerGrid2}>
+                <div className={styles.ownerField}>
+                  <MdOutlinePhone size={20} className={styles.ownerFieldIcon} />
+                  <span className={styles.ownerFieldText}>
+                    +91 {ownerInfo.phoneNumber ?? "-"}
+                  </span>
+                </div>
+
+                <div className={styles.ownerField}>
+                  <span className={styles.ownerFieldText}>
+                    @{ownerInfo.userName ?? "-"}
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.ownerGenderSection}>
+                <span className={styles.vehicleInfoLabel}>Gender</span>
+                <div className={styles.vehicleInfoValue}>
+                  {ownerInfo.gender ?? ownerInfo.location ?? "-"}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Review Decision */}
@@ -214,27 +332,40 @@ const CarVarifecation = () => {
           *Review all details carefully before making a decision
         </p>
 
-        <div className={styles.reviewActions}>
-          <button
-            type="button"
-            className={styles.approveBtn}
-          >
-            <span>✓</span>
-            <span>Approve Car</span>
-          </button>
+        {carDetails.status !== "PENDING_APPROVAL" ? (
+          <p className={styles.reviewState}>
+            This car has already been{" "}
+            {carDetails.status === "ACTIVE" ? "approved" : "rejected"}.
+          </p>
+        ) : (
+          <>
+            <div className={styles.reviewActions}>
+              <button
+                type="button"
+                className={styles.approveBtn}
+                onClick={handleApprove}
+                disabled={loadingApproval || loadingReject}
+              >
+                <span>✓</span>
+                <span>{loadingApproval ? "Approving..." : "Approve Car"}</span>
+              </button>
 
-          <button
-            type="button"
-            className={styles.rejectBtn}
-          >
-            <span>✕</span>
-            <span>Reject Car</span>
-          </button>
-        </div>
+              <button
+                type="button"
+                className={styles.rejectBtn}
+                onClick={handleReject}
+                disabled={loadingReject || loadingApproval}
+              >
+                <span>✕</span>
+                <span>{loadingReject ? "Rejecting..." : "Reject Car"}</span>
+              </button>
+            </div>
 
-        <p className={styles.reviewNote}>
-          By approving, you confirm all details have been verified.
-        </p>
+            <p className={styles.reviewNote}>
+              By approving, you confirm all details have been verified.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

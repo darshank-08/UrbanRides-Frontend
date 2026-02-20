@@ -36,7 +36,7 @@ function App() {
         <Route path="/Owner/Update-Car/:id" element={<UpdateCar />} />
 
         {/* Employee Routes */}
-        <Route path="Employee" element={<Employee />}/>
+        <Route path="/Employee" element={<Employee />}/>
         <Route path="/Car-Varification/:id" element={<CarVarifecation />} />
 
       </Routes>

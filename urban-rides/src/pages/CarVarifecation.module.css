@@ -4,7 +4,6 @@
   background-color: #f5f7fb;
 }
 
-/* Loading / Error */
 .loading {
   padding: 24px;
   text-align: center;
@@ -26,7 +25,7 @@
   z-index: 50;
   display: flex;
   width: 100%;
-  min-width: 100vh;
+  min-width: 100vw; 
   align-items: center;
   justify-content: space-around;
   padding: 6px 10px;
@@ -97,9 +96,9 @@
   background-color: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  max-width: 80%;
+  max-width: 75%;
   width: 75vw;
-  padding: 20px;
+  padding: 15px;
   display: grid;
   gap: 18px;
   margin: 0 auto 20px;
@@ -177,9 +176,10 @@
   padding: 20px 24px 24px;
   margin: 20px auto 0;
   width: 75vw;
-  }
+  max-width: 75vw;
+}
 
-.vehicleInfoTitle {
+.vehicleInfoTitle, .ownerCardHeader h3 {
   margin: 0 0 10px 0;
   font-size: 18px;
   font-weight: 600;
@@ -199,13 +199,12 @@
   row-gap: 18px;
 }
 
-.vehicleInfoItem {
+.vehicleInfoItem, .empInfoValue{
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.vehicleInfoLabel {
+.vehicleInfoLabel, .employeeLabel {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -219,18 +218,99 @@
   color: #111827;
 }
 
-.ownerLabel {
-  font-size: 11px;
-  color: #6b7280;
-}
-
 .vehicleInfoCard .vehicleInfoValue:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-/* review section */
+/* EMPLOYEE CARD */
+.ownerCard{
+  background: #fff;
+  border: 1px solid #e6edf5;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+  width: 75vw;
+  max-width: 75vw;
+  margin: 20px auto 0;
+}
 
+.ownerCardHeader{
+  padding: 18px 22px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.ownerCardBody{
+  padding: 18px 20px 22px;
+}
+
+.empState{
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.ownerTop{
+  display: flex;
+  gap: 16px;
+  width: fit-content;
+  padding: 12px 14px;
+  border-radius: 15px;
+  align-items: center;
+  margin-bottom: 16px;
+  background-color: #f4f2f2cf;
+}
+
+.ownerAvatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: grid;
+  place-items: center;
+  color: #475569;
+}
+
+.ownerNameSpan{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 10px;
+}
+
+.ownerGrid2{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.ownerField{
+  background-color: #f4f2f2cf;
+  padding: 14px 16px; 
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ownerFieldIcon{
+  color: #94a3b8;
+}
+
+.ownerFieldText{
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.ownerGenderSection{
+  background-color: #f4f2f2cf;
+  padding: 14px 16px; 
+  border-radius: 15px;
+  padding: 16px;
+}
+
+/* review section */
 .reviewCard {
   background-color: #ffffff;
   border-radius: 14px;
@@ -238,6 +318,14 @@
   padding: 20px 24px 24px;
   margin: 20px auto 0;
   width: 75vw;
+  max-width: 75vw;
+  margin-bottom: 20px;
+}
+
+.reviewState{
+  margin-top: 20px;
+  color: #64748b;
+  font-size: 0.95rem;
 }
 
 .reviewTitle {
@@ -264,7 +352,7 @@
 .rejectBtn {
   height: 40px;
   border-radius: 999px;
-  border: 1px solid transparent;
+  border:  1px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,24 +364,24 @@
 }
 
 .approveBtn {
-  background-color: #059669;   
+  background-color: #059669;
   border-color: #059669;
   color: #ffffff;
 }
 
 .approveBtn:hover {
-  background-color: #047857;   
+  background-color: #047857;
   border-color: #047857;
 }
 
 .rejectBtn {
   background-color: #ffffff;
   border-color: #e5e7eb;
-  color: #b91c1c;             
+  color: #b91c1c;
 }
 
 .rejectBtn:hover {
-  background-color: #fef2f2;   
+  background-color: #fef2f2;
 }
 
 .reviewNote {
@@ -302,33 +390,50 @@
   color: #6b7280;
 }
 
+/* Responsive */
+@media (max-width: 900px){
+  .imgAction,
+  .vehicleInfoCard,
+  .empCard,
+  .employeeSection,
+  .reviewCard{
+    width: 92vw;
+  }
+
+  .vehicleInfoGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .topBar {
     min-width: 0;
     gap: 8px;
   }
 
-  .owner {
-    justify-content: flex-start;
-  }
-
   .status {
     width: 100%;
     justify-content: flex-start;
   }
+}
 
-  .vehicleInfoGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 24px;
-  }
+@media (max-width: 650px){
+  .empGrid2{ grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .vehicleInfoCard {
+  .vehicleInfoCard,
+  .employeeSection,
+  .reviewCard{
     padding: 16px 16px 20px;
   }
 
   .vehicleInfoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ownerGrid2{
     grid-template-columns: 1fr;
   }
 }
