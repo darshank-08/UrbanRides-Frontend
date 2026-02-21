@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
-import Navbar from "../components/Navbar";
 import Creta from "../assets/Car_Creta.png";
 import Virtus from "../assets/Car_Virtus.png";
 import Swift from "../assets/Car_Swift.png"; 
@@ -14,7 +13,6 @@ const Home = () => {
         {/* Hero section */}
         <div className={styles.hero}>
 
-          <Navbar />
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>
             URBAN RIDES
