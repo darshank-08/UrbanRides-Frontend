@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Owner.module.css";
+import styles from "./owner.module.css";
 import Hamburger from "../components/Hamburger";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
