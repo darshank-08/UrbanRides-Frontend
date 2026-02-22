@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./profilePage.module.css.module.css"
+import styles from "./profile.module.css"
 import ProfileCard from '../components/ProfileCard'
 
 const ProfilePage = () => {
