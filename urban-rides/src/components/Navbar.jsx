@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
+
+    // Navbar
     <nav className={styles.navbar}>
       
       <div className={styles.left}>
