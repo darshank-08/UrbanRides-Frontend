@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./navbar.module.css";
+import { Link } from "react-router-dom";    
 
 const Navbar = () => {
   return (
@@ -10,7 +11,7 @@ const Navbar = () => {
       </div>
 
       <div className={styles.right}>
-        <button className={styles.loginBtn}>Login</button>
+        <button onClick={() => window.location.href = "/login"} className={styles.loginBtn}>Login</button>
       </div>
     </nav>
   );
