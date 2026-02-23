@@ -32,7 +32,7 @@ const CarVarifecation = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`http://localhost:8080/Employee/car/${id}`, {
+        const res = await fetch(`https://urban-rides.onrender.com/Employee/car/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -69,7 +69,7 @@ const CarVarifecation = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`http://localhost:8080/Employee/owner/${owner}`, {
+        const res = await fetch(`https://urban-rides.onrender.com/Employee/owner/${owner}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -99,7 +99,7 @@ const CarVarifecation = () => {
     setLoadingApproval(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/Employee/car-approval/${carDetails.id}/${emp}`, {
+      const res = await fetch(`https://urban-rides.onrender.com/Employee/car-approval/${carDetails.id}/${emp}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -119,7 +119,7 @@ const CarVarifecation = () => {
     setLoadingReject(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/Employee/car-reject/${carDetails.id}/${emp}`, {
+      const res = await fetch(`https://urban-rides.onrender.com/Employee/car-reject/${carDetails.id}/${emp}`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${token}` },
       });

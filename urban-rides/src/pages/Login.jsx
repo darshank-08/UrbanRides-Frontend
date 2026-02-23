@@ -6,17 +6,17 @@ import Navbar from "../components/SignupNavbar.jsx";
 //Switching between test and production APIs
 const userAPI = {
   testApi: "http://localhost:8080/login/user",
-  prodAPI: "https://urban-rides-production.up.railway.app/login/user"
+  prodAPI: "https://urban-rides.onrender.com/login/user"
 };
 
 const empAPI = {
   testApi: "http://localhost:8080/login/employee",
-  prodAPI: "https://urban-rides-production.up.railway.app/login/employee"
+  prodAPI: "https://urban-rides.onrender.com/login/employee"
 };
 
 const adminAPI = {
   testApi: "http://localhost:8080/login/admin",
-  prodAPI: "https://urban-rides-production.up.railway.app/login/admin"
+  prodAPI: "https://urban-rides.onrender.com/login/admin"
 };
 
 // Build payload based on role
@@ -47,9 +47,9 @@ const buildPayload = (role, data) => {
 };
 
 const getApiByRole = (role) => {
-  if (role === "User") return userAPI.testApi;
-  if (role === "Employee") return empAPI.testApi;
-  if (role === "Admin") return adminAPI.testApi;
+  if (role === "User") return userAPI.prodAPI;
+  if (role === "Employee") return empAPI.prodAPI;
+  if (role === "Admin") return adminAPI.prodAPI;
   return null;
 };
 

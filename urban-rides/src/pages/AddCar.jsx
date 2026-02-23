@@ -42,7 +42,7 @@ const AddCar = () => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch("http://localhost:8080/Owner/upload", {
+    const res = await fetch("https://urban-rides.onrender.com/Owner/upload", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -104,12 +104,7 @@ const AddCar = () => {
         document: documentUrl
       };
 
-      const API = {
-        test: "http://localhost:8080/Owner/add-cars",
-        prod: "https://urban-rides-production.up.railway.app/car/add"
-      };
-
-      const res = await fetch(API.test, {
+      const res = await fetch("https://urban-rides.onrender.com/car/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

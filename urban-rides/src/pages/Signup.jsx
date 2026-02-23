@@ -60,7 +60,7 @@ const Signup = () => {
 
     const userAPI = {
       testApi: "http://localhost:8080/sign-up/",
-      prodApi: "https://urban-rides-production.up.railway.app/sign-up/"
+      prodApi: "https://urban-rides.onrender.com/sign-up/"
     };
 
     const payload = {
@@ -73,8 +73,8 @@ const Signup = () => {
 
     const api =
       userType === "Renter"
-        ? userAPI.testApi + "renter"
-        : userAPI.testApi + "owner";
+        ? userAPI.prodApi + "renter"
+        : userAPI.prodApi + "owner";
 
     try {
       const res = await fetch(api, {

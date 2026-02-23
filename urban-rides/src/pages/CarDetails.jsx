@@ -31,7 +31,7 @@ const CarDetails = () => {
   //Building API for CAR details 
   const API = {
     testAPI: `http://localhost:8080/Renter/car/${carId}`,
-    prodAPI: `https://urban-rides-production.up.railway.app/Renter/car/${carId}`,
+    prodAPI: `https://urban-rides.onrender.com/Renter/car/${carId}`,
   };
 
   // Parses "YYYY-MM-DD" into a local Date
@@ -57,7 +57,7 @@ const CarDetails = () => {
 
         const token = localStorage.getItem("token");
 
-        const response = await fetch(API.testAPI, {
+        const response = await fetch(API.prodAPI, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const CarDetails = () => {
 
   const BookingAPI = {
     testAPI: `http://localhost:8080/Renter/booking/${carId}`,
-    prodAPI: `https://urban-rides-production.up.railway.app/Renter/booking/${carId}`,
+    prodAPI: `https://urban-rides.onrender.com/Renter/booking/${carId}`,
   };
 
   //Creating Bookings
@@ -163,7 +163,7 @@ const CarDetails = () => {
 
       const token = localStorage.getItem("token");
 
-      const res = await fetch(BookingAPI.testAPI, {
+      const res = await fetch(BookingAPI.prodAPI, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

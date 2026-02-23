@@ -22,22 +22,22 @@ const ProfileCard = () => {
   });
 
   const API = {
-    OWNER: "http://localhost:8080/Owner/user",
-    RENTER: `http://localhost:8080/Renter/user/${userName}`,
-    EMPLOYEE: "http://localhost:8080/Employee/user",
-    ADMIN: "http://localhost:8080/Admin/user",
+    OWNER: "https://urban-rides.onrender.com/Owner/user",
+    RENTER: `https://urban-rides.onrender.com/Renter/user/${userName}`,
+    EMPLOYEE: "https://urban-rides.onrender.com/Employee/user",
+    ADMIN: "https://urban-rides.onrender.com/Admin/user",
   };
 
   const UPDATE = {
-    OWNER: "http://localhost:8080/Owner/update",
-    RENTER: "http://localhost:8080/Renter/update",
-    EMPLOYEE: "http://localhost:8080/Employee/user",
-    ADMIN: "http://localhost:8080/Admin/user",
+    OWNER: "https://urban-rides.onrender.com/Owner/update",
+    RENTER: "https://urban-rides.onrender.com/Renter/update",
+    EMPLOYEE: "https://urban-rides.onrender.com/Employee/user",
+    ADMIN: "https://urban-rides.onrender.com/Admin/user",
   };
 
   const DELETE = {
-    OWNER: "http://localhost:8080/Owner/delete",
-    RENTER: "http://localhost:8080/Renter/delete",
+    OWNER: "https://urban-rides.onrender.com/Owner/delete",
+    RENTER: "https://urban-rides.onrender.com/Renter/delete",
   };
 
   let apiUrl = isOwner ? API.OWNER : isRenter ? API.RENTER : isEmp ? API.EMPLOYEE : API.ADMIN;
@@ -77,7 +77,7 @@ const ProfileCard = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        "http://localhost:8080/profile/upload-profile-photo",
+        "https://urban-rides.onrender.com/profile/upload-profile-photo",
         {
           method: "POST",
           headers: {

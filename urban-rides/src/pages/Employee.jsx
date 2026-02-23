@@ -24,12 +24,12 @@ const Employee = () => {
 
   const PendingCars = {
     test: "http://localhost:8080/Employee/pending-cars",
-    prod: "https://urban-rides-production.up.railway.app/pending-cars",
+    prod: "https://urban-rides.onrender.com/pending-cars",
   };
 
   const usersList = {
     test: "http://localhost:8080/Employee/Get-Users",
-    prod: "https://urban-rides-production.up.railway.app/Employee/Get-Users",
+    prod: "https://urban-rides.onrender.com/Employee/Get-Users",
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Employee = () => {
       setLoadingCars(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(PendingCars.test, {
+        const res = await fetch(PendingCars.prod, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -59,7 +59,7 @@ const Employee = () => {
       setLoadingUsers(true);
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(usersList.test, {
+        const res = await fetch(usersList.prod, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -73,7 +73,7 @@ const Employee = () => {
     };
 
     fetchUsers();
-  }, [view]); // keep as you had
+  }, [view]);
 
   // fetching reviewed cars only when employee clicks Reviewed Cars
   useEffect(() => {
@@ -85,7 +85,7 @@ const Employee = () => {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(
-          `http://localhost:8080/Employee/Reviewed-By/${encodeURIComponent(
+          `https://urban-rides.onrender.com/Employee/Reviewed-By/${encodeURIComponent(
             user
           )}`,
           { headers: { Authorization: `Bearer ${token}` } }

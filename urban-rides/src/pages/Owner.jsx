@@ -16,7 +16,7 @@ const Owner = () => {
 
   const API = {
     test: "http://localhost:8080/Owner/cars",
-    prod: "https://urban-rides-production.up.railway.app/Owner/cars",
+    prod: "https://urban-rides.onrender.com/Owner/cars",
   };
 
   // Fetch all cars
@@ -25,7 +25,7 @@ const Owner = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const response = await fetch(API.test, {
+        const response = await fetch(API.prod, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -70,14 +70,14 @@ const Owner = () => {
 
     const deleteAPI = {
       test: `http://localhost:8080/Owner/car/${carId}`,
-      prod: `https://urban-rides-production.up.railway.app/car/${carId}`,
+      prod: `https://urban-rides.onrender.com/car/${carId}`,
     } 
 
     try {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        deleteAPI.test,
+        deleteAPI.prod,
         {
           method: "DELETE",
           headers: {

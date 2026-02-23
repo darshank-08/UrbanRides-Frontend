@@ -25,19 +25,19 @@ const Renter = () => {
 
   const API = {
     testAPI: "http://localhost:8080/Renter/active-cars",
-    prodAPI: "https://urban-rides-production.up.railway.app/Renter/active-cars",
+    prodAPI: "https://urban-rides.onrender.com/Renter/active-cars",
   };
 
   const myBookingAPI = {
     testAPI: "http://localhost:8080/Renter/my-Bookings",
-    prodAPI: "https://urban-rides-production.up.railway.app/Renter/my-Bookings",
+    prodAPI: "https://urban-rides.onrender.com/Renter/my-Bookings",
   };
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(API.testAPI, {
+        const response = await fetch(API.prodAPI, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Renter = () => {
     const fetchBookings = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(myBookingAPI.testAPI, {
+        const response = await fetch(myBookingAPI.prodAPI, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
