@@ -20,6 +20,7 @@ function App() {
       <Routes>
         {/* Common Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/urban-ride-website" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Profile" element={<ProfilePage />} />

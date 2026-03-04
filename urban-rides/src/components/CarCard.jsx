@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHeart, FaMapMarkerAlt } from "react-icons/fa";
+import { FaHeart, FaMapMarkerAlt, FaStar } from "react-icons/fa";
 import styles from "./CarCard.module.css";
 
 const CarCard = ({ car, onClick }) => {
@@ -23,14 +23,6 @@ const CarCard = ({ car, onClick }) => {
         />
 
         <span className={styles.statusBadge}>{statusLabel}</span>
-
-        <button
-          type="button"
-          className={styles.favBtn}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <FaHeart />
-        </button>
       </div>
 
       <div className={styles.content}>
@@ -39,8 +31,14 @@ const CarCard = ({ car, onClick }) => {
             {car.company} {car.model}
           </h4>
 
-          {car.ownerName && (
-            <span className={styles.owner}>by {car.ownerName}</span>
+          {car.totalRatings > 0 && (
+            <div className={styles.ratingBadge}>
+              <FaStar className={styles.starIcon} />
+              <span>{car.averageRating?.toFixed(1)}</span>
+              <span className={styles.reviews}>
+                ({car.totalRatings})
+              </span>
+            </div>
           )}
         </div>
 

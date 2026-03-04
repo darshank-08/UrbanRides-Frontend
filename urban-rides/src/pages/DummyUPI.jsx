@@ -12,6 +12,8 @@ const DummyUPI = () => {
 
   const { booking, amount } = state;
 
+  // Simulate UPI payment processing, not actually paying anything
+
   const handlePayment = () => {
     setLoading(true);
 
