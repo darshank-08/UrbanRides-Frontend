@@ -76,6 +76,9 @@ const Signup = () => {
         ? userAPI.prodApi + "renter"
         : userAPI.prodApi + "owner";
 
+        console.log("Payload:", payload);
+        console.log("API Endpoint:", api);
+
     try {
       const res = await fetch(api, {
         method: "POST",
