@@ -95,6 +95,8 @@ const Renter = () => {
 
         const bookingsArray = Array.isArray(data.body) ? data.body : [];
         setMyBookings(bookingsArray);
+        console.log("My Bookings:", bookingsArray);
+
 
       } catch (err) {
         console.error("Error fetching bookings:", err);
