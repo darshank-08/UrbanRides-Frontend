@@ -115,7 +115,9 @@
   object-fit: contain;
   object-position: center;
   border-radius: 10px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .noImage {

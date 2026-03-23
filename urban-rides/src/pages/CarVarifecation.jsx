@@ -136,16 +136,21 @@ const CarVarifecation = () => {
   const formatCreatedAt = (iso) => {
     if (!iso) return "-";
     const dt = new Date(iso);
+
     const date = dt.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "short",
       year: "numeric",
+      timeZone: "Asia/Kolkata",
     });
+
     const time = dt.toLocaleTimeString("en-IN", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
+      timeZone: "Asia/Kolkata",
     });
+
     return `${date} • ${time}`;
   };
 
