@@ -24,7 +24,7 @@ const Employee = () => {
 
   const PendingCars = {
     test: "http://localhost:8080/Employee/pending-cars",
-    prod: "https://urban-rides.onrender.com/pending-cars",
+    prod: "https://urban-rides.onrender.com/Employee/pending-cars",
   };
 
   const usersList = {
