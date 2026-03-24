@@ -120,3 +120,125 @@
     font-size: 0.75rem;
   }
 }
+.upiWrapper {
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upiCard {
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.199);
+}
+
+.upiCard h2 {
+  margin-bottom: 12px;
+}
+
+.upiCard p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+
+.upiCard button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #0b0d12;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.upiCard button:disabled {
+  opacity: 0.6;
+}
+
+.note {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+
+@media (max-width: 1024px) {
+  .upiCard {
+    width: 300px;
+    padding: 22px;
+  }
+
+  .upiCard h2 {
+    font-size: 1.4rem;
+  }
+
+  .upiCard p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .upiWrapper {
+    padding: 20px;
+  }
+
+  .upiCard {
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .upiCard h2 {
+    font-size: 1.3rem;
+  }
+
+  .upiCard p {
+    font-size: 0.9rem;
+  }
+
+  .upiCard button {
+    padding: 11px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .upiWrapper {
+    min-height: 100dvh;
+    padding: 16px;
+    align-items: flex-start;
+  }
+
+  .upiCard {
+    width: 100%;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    margin-top: 40px;
+  }
+
+  .upiCard h2 {
+    font-size: 1.2rem;
+  }
+
+  .upiCard p {
+    font-size: 0.85rem;
+  }
+
+  .upiCard button {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .note {
+    font-size: 0.75rem;
+  }
+}
